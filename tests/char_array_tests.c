@@ -305,3 +305,113 @@ TEST(CharArrayTests, CharArrayDeleteExistingElement) {
 
   TEST_ASSERT_EQUAL(1, charArray.length);
 }
+
+TEST(CharArrayTests, CharArrayDeleteAtZeroLength) {
+  int result = CharArrayDeleteAt(&charArray, 0);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArrayDeleteAtExistingElement) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  int result = CharArrayDeleteAt(&charArray, 2);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(4, charArray.length);
+
+  char x;
+
+  CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL('A', x);
+
+  CharArrayAt(&charArray, 1, &x);
+
+  TEST_ASSERT_EQUAL('B', x);
+
+  CharArrayAt(&charArray, 2, &x);
+
+  TEST_ASSERT_EQUAL('D', x);
+
+  CharArrayAt(&charArray, 3, &x);
+
+  TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArrayDeleteAtLessThanZeroIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  int result = CharArrayDeleteAt(&charArray, -2);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(4, charArray.length);
+
+  char x;
+
+  CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL('A', x);
+
+  CharArrayAt(&charArray, 1, &x);
+
+  TEST_ASSERT_EQUAL('B', x);
+
+  CharArrayAt(&charArray, 2, &x);
+
+  TEST_ASSERT_EQUAL('C', x);
+
+  CharArrayAt(&charArray, 3, &x);
+
+  TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArrayDeleteAtGreaterThanLengthIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  int result = CharArrayDeleteAt(&charArray, 5);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArrayDeleteAtLessThanNegativeLengthIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  int result = CharArrayDeleteAt(&charArray, -6);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}

@@ -76,12 +76,12 @@
 
 #define GENERIC_ARRAY_ELEMENT_TO_STRING_BUFFER_SIZE(element) 32
 
-#define GENERIC_ARRAY_ELEMENT_TO_STRING_LENGTH(buffer, bufferSize, element) snprintf(buffer, bufferSize, "%c, ", element)
+#define GENERIC_ARRAY_ELEMENT_TO_STRING_LENGTH(buffer, bufferSize, element) snprintf(buffer, bufferSize, "'%c', ", element)
 
-#define GENERIC_ARRAY_ELEMENT_TO_STRING_LAST_LENGTH(buffer, bufferSize, element) snprintf(buffer, bufferSize, "%c", element)
+#define GENERIC_ARRAY_ELEMENT_TO_STRING_LAST_LENGTH(buffer, bufferSize, element) snprintf(buffer, bufferSize, "'%c'", element)
 
-#define GENERIC_ARRAY_ELEMENT_TO_STRING(buffer, bufferSize, element) snprintf(buffer, bufferSize, "%c, ", element)
+#define GENERIC_ARRAY_ELEMENT_TO_STRING(buffer, bufferSize, element) snprintf(buffer, bufferSize, "'%c', ", element)
 
-#define GENERIC_ARRAY_ELEMENT_TO_STRING_LAST(buffer, bufferSize, element) snprintf(buffer, bufferSize, "%c", element)
+#define GENERIC_ARRAY_ELEMENT_TO_STRING_LAST(buffer, bufferSize, element) snprintf(buffer, bufferSize, "'%c'", element)
 
 #include "generic_array.h"
