@@ -45,3 +45,215 @@ TEST(CharArrayTests, CharArrayPushCapacityPlusOneElements) {
 
   TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY * GA_CAPACITY_MULTIPLIER, charArray.capacity);
 }
+
+TEST(CharArrayTests, CharArrayAtZeroLength) {
+  char x;
+
+  int result = CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArrayAtExistingElement) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  char x;
+
+  int result = CharArrayAt(&charArray, 2, &x);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL('C', x);
+}
+
+TEST(CharArrayTests, CharArrayAtLessThanZeroIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  char x;
+
+  int result = CharArrayAt(&charArray, -2, &x);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL('D', x);
+}
+
+TEST(CharArrayTests, CharArrayAtGreaterThanLengthIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  char x;
+
+  int result = CharArrayAt(&charArray, 5, &x);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArrayAtLessThanNegativeLengthIndex) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  char x;
+
+  int result = CharArrayAt(&charArray, -6, &x);
+
+  TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArrayClear) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArrayPush(&charArray, 'C');
+
+  CharArrayPush(&charArray, 'D');
+
+  CharArrayPush(&charArray, 'E');
+
+  int result = CharArrayClear(&charArray);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, charArray.length);
+}
+
+TEST(CharArrayTests, CharArrayConcatEmptyArrays) {
+  CharArray otherCharArray;
+
+  CharArrayInitialize(&otherCharArray);
+
+  int result = CharArrayConcat(&charArray, &otherCharArray);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, charArray.length);
+
+  CharArrayDeinitialize(&otherCharArray);
+}
+
+TEST(CharArrayTests, CharArrayConcatEmptyArrayToNonEmptyArray) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArray otherCharArray;
+
+  CharArrayInitialize(&otherCharArray);
+
+  int result = CharArrayConcat(&charArray, &otherCharArray);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(2, charArray.length);
+
+  char x;
+
+  CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL('A', x);
+
+  CharArrayAt(&charArray, 1, &x);
+
+  TEST_ASSERT_EQUAL('B', x);
+
+  CharArrayDeinitialize(&otherCharArray);
+}
+
+TEST(CharArrayTests, CharArrayConcatNonEmptyArrayToEmptyArray) {
+  CharArray otherCharArray;
+
+  CharArrayInitialize(&otherCharArray);
+
+  CharArrayPush(&otherCharArray, 'A');
+
+  CharArrayPush(&otherCharArray, 'B');
+
+  int result = CharArrayConcat(&charArray, &otherCharArray);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(2, charArray.length);
+
+  char x;
+
+  CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL('A', x);
+
+  CharArrayAt(&charArray, 1, &x);
+
+  TEST_ASSERT_EQUAL('B', x);
+
+  CharArrayDeinitialize(&otherCharArray);
+}
+
+TEST(CharArrayTests, CharArrayConcatNonEmptyArrayToNonEmptyArray) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  CharArray otherCharArray;
+
+  CharArrayInitialize(&otherCharArray);
+
+  CharArrayPush(&otherCharArray, 'C');
+
+  CharArrayPush(&otherCharArray, 'D');
+
+  int result = CharArrayConcat(&charArray, &otherCharArray);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(4, charArray.length);
+
+  char x;
+
+  CharArrayAt(&charArray, 0, &x);
+
+  TEST_ASSERT_EQUAL('A', x);
+
+  CharArrayAt(&charArray, 1, &x);
+
+  TEST_ASSERT_EQUAL('B', x);
+
+  CharArrayAt(&charArray, 2, &x);
+
+  TEST_ASSERT_EQUAL('C', x);
+
+  CharArrayAt(&charArray, 3, &x);
+
+  TEST_ASSERT_EQUAL('D', x);
+
+  CharArrayDeinitialize(&otherCharArray);
+}

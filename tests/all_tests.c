@@ -5,6 +5,16 @@ TEST_GROUP_RUNNER(CharArrayTests) {
   RUN_TEST_CASE(CharArrayTests, CharArrayInitialCapacity);
   RUN_TEST_CASE(CharArrayTests, CharArrayPushOneElement);
   RUN_TEST_CASE(CharArrayTests, CharArrayPushCapacityPlusOneElements);
+  RUN_TEST_CASE(CharArrayTests, CharArrayAtZeroLength);
+  RUN_TEST_CASE(CharArrayTests, CharArrayAtExistingElement);
+  RUN_TEST_CASE(CharArrayTests, CharArrayAtLessThanZeroIndex);
+  RUN_TEST_CASE(CharArrayTests, CharArrayAtGreaterThanLengthIndex);
+  RUN_TEST_CASE(CharArrayTests, CharArrayAtLessThanNegativeLengthIndex);
+  RUN_TEST_CASE(CharArrayTests, CharArrayClear);
+  RUN_TEST_CASE(CharArrayTests, CharArrayConcatEmptyArrays);
+  RUN_TEST_CASE(CharArrayTests, CharArrayConcatEmptyArrayToNonEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayConcatNonEmptyArrayToEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayConcatNonEmptyArrayToNonEmptyArray);
 }
 
 TEST_GROUP_RUNNER(DoubleArrayTests) {
