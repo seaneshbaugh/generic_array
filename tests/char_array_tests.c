@@ -257,3 +257,51 @@ TEST(CharArrayTests, CharArrayConcatNonEmptyArrayToNonEmptyArray) {
 
   CharArrayDeinitialize(&otherCharArray);
 }
+
+TEST(CharArrayTests, CharArrayCountEmptyArray) {
+  size_t result = CharArrayCount(&charArray);
+
+  TEST_ASSERT_EQUAL(0, result);
+}
+
+TEST(CharArrayTests, CharArrayCountNonEmptyArray) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  size_t result = CharArrayCount(&charArray);
+
+  TEST_ASSERT_EQUAL(2, result);
+}
+
+TEST(CharArrayTests, CharArrayDeleteFromEmptyArray) {
+  int result = CharArrayDelete(&charArray, 'A');
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, charArray.length);
+}
+
+TEST(CharArrayTests, CharArrayDeleteNonExistingElement) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  int result = CharArrayDelete(&charArray, 'C');
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(2, charArray.length);
+}
+
+TEST(CharArrayTests, CharArrayDeleteExistingElement) {
+  CharArrayPush(&charArray, 'A');
+
+  CharArrayPush(&charArray, 'B');
+
+  int result = CharArrayDelete(&charArray, 'B');
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(1, charArray.length);
+}

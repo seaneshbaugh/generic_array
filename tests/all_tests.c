@@ -15,6 +15,11 @@ TEST_GROUP_RUNNER(CharArrayTests) {
   RUN_TEST_CASE(CharArrayTests, CharArrayConcatEmptyArrayToNonEmptyArray);
   RUN_TEST_CASE(CharArrayTests, CharArrayConcatNonEmptyArrayToEmptyArray);
   RUN_TEST_CASE(CharArrayTests, CharArrayConcatNonEmptyArrayToNonEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayCountEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayCountNonEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDeleteFromEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDeleteNonExistingElement);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDeleteExistingElement);
 }
 
 TEST_GROUP_RUNNER(DoubleArrayTests) {
