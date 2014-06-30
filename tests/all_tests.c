@@ -25,6 +25,10 @@ TEST_GROUP_RUNNER(CharArrayTests) {
   RUN_TEST_CASE(CharArrayTests, CharArrayDeleteAtLessThanZeroIndex);
   RUN_TEST_CASE(CharArrayTests, CharArrayDeleteAtGreaterThanLengthIndex);
   RUN_TEST_CASE(CharArrayTests, CharArrayDeleteAtLessThanNegativeLengthIndex);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDropOneEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDropManyEmptyArray);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDropLessThanArrayLength);
+  RUN_TEST_CASE(CharArrayTests, CharArrayDropGreaterThanArrayLength);
 }
 
 TEST_GROUP_RUNNER(DoubleArrayTests) {
@@ -200,6 +204,10 @@ TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
   RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitialCapacity);
   RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushOneElement);
   RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushCapacityPlusOneElements);
+  RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropOneEmptyArray);
+  RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropManyEmptyArray);
+  RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropLessThanArrayLength);
+  RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropGreaterThanArrayLength);
 }
 
 TEST_GROUP_RUNNER(UnsignedShortArrayTests) {

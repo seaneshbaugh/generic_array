@@ -45,3 +45,65 @@ TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushCapacityPlusOneE
 
   TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY * GA_CAPACITY_MULTIPLIER, unsignedLongLongIntArray.capacity);
 }
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropOneEmptyArray) {
+  int result = UnsignedLongLongIntArrayDrop(&unsignedLongLongIntArray, 1);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, unsignedLongLongIntArray.length);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropManyEmptyArray) {
+  int result = UnsignedLongLongIntArrayDrop(&unsignedLongLongIntArray, 10);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, unsignedLongLongIntArray.length);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropLessThanArrayLength) {
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 5ULL);
+
+  int result = UnsignedLongLongIntArrayDrop(&unsignedLongLongIntArray, 3);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(2, unsignedLongLongIntArray.length);
+
+  unsigned long long int x;
+
+  UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 0, &x);
+
+  TEST_ASSERT_EQUAL(4ULL, x);
+
+  UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 1, &x);
+
+  TEST_ASSERT_EQUAL(5ULL, x);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayDropGreaterThanArrayLength) {
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+  UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 5ULL);
+
+  int result = UnsignedLongLongIntArrayDrop(&unsignedLongLongIntArray, 6);
+
+  TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+  TEST_ASSERT_EQUAL(0, unsignedLongLongIntArray.length);
+}

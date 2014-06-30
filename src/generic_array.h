@@ -138,7 +138,7 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Drop, __GENERIC_ARRAY_NAME__ *array, 
     }
 
     if (n > 0) {
-        memmove(array->values, array->values + n + 1, (array->length - n - 1) * sizeof(__GENERIC_ARRAY_TYPE__));
+        memmove(array->values, array->values + n, (array->length - n) * sizeof(__GENERIC_ARRAY_TYPE__));
 
         memset(array->values + array->length - n, 0, sizeof(__GENERIC_ARRAY_TYPE__));
 
