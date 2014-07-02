@@ -1,4 +1,3 @@
-CC=clang
 CFLAGS=-std=c11 -Wall -g
 
 UNITY_ROOT=tests/unity

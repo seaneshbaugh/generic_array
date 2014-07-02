@@ -1,0 +1,16 @@
+#include "unity_fixture.h"
+<% @types.each do |type| %>
+TEST_GROUP_RUNNER(<%= type.name_camelized %>ArrayTests) {
+<% @test_names.each do |test_name| %>    RUN_TEST_CASE(<%= type.name_camelized %>ArrayTests, <%= type.name_camelized %>Array<%= test_name %>);
+<% end -%>
+}
+<% end -%>
+
+static void RunAllTests(void) {
+<% @types.each do |type| %>    RUN_TEST_GROUP(<%= type.name_camelized %>ArrayTests);
+<% end -%>
+}
+
+int main(int argc, char* argv[]) {
+    return UnityMain(argc, argv, RunAllTests);
+}
