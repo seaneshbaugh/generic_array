@@ -15,6 +15,8 @@ TEST_SETUP(CharArrayTests) {
 
 TEST_TEAR_DOWN(CharArrayTests) {
     CharArrayDeinitialize(&charArray);
+
+    CharArrayDeinitialize(&otherCharArray);
 }
 
 TEST(CharArrayTests, CharArrayInitialLength) {

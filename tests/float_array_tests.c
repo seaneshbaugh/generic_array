@@ -15,6 +15,8 @@ TEST_SETUP(FloatArrayTests) {
 
 TEST_TEAR_DOWN(FloatArrayTests) {
     FloatArrayDeinitialize(&floatArray);
+
+    FloatArrayDeinitialize(&otherFloatArray);
 }
 
 TEST(FloatArrayTests, FloatArrayInitialLength) {

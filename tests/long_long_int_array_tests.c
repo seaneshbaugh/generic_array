@@ -15,6 +15,8 @@ TEST_SETUP(LongLongIntArrayTests) {
 
 TEST_TEAR_DOWN(LongLongIntArrayTests) {
     LongLongIntArrayDeinitialize(&longLongIntArray);
+
+    LongLongIntArrayDeinitialize(&otherLongLongIntArray);
 }
 
 TEST(LongLongIntArrayTests, LongLongIntArrayInitialLength) {

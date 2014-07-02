@@ -15,6 +15,8 @@ TEST_SETUP(SignedCharArrayTests) {
 
 TEST_TEAR_DOWN(SignedCharArrayTests) {
     SignedCharArrayDeinitialize(&signedCharArray);
+
+    SignedCharArrayDeinitialize(&otherSignedCharArray);
 }
 
 TEST(SignedCharArrayTests, SignedCharArrayInitialLength) {

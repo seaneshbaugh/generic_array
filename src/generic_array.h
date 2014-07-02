@@ -102,7 +102,7 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Delete, __GENERIC_ARRAY_NAME__ *array
     }
 
     if (i2 < array->length) {
-        memset(array->values + (i2 * sizeof(__GENERIC_ARRAY_TYPE__)), 0, (array->capacity - i2) * sizeof(__GENERIC_ARRAY_TYPE__));
+        memset(array->values + (i2 * sizeof(__GENERIC_ARRAY_TYPE__)), 0, (array->capacity - i2 - sizeof(__GENERIC_ARRAY_TYPE__)) * sizeof(__GENERIC_ARRAY_TYPE__));
 
         array->length = i2;
     }

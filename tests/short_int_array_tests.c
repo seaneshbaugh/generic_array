@@ -15,6 +15,8 @@ TEST_SETUP(ShortIntArrayTests) {
 
 TEST_TEAR_DOWN(ShortIntArrayTests) {
     ShortIntArrayDeinitialize(&shortIntArray);
+
+    ShortIntArrayDeinitialize(&otherShortIntArray);
 }
 
 TEST(ShortIntArrayTests, ShortIntArrayInitialLength) {

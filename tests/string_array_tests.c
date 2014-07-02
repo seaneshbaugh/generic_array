@@ -15,6 +15,8 @@ TEST_SETUP(StringArrayTests) {
 
 TEST_TEAR_DOWN(StringArrayTests) {
     StringArrayDeinitialize(&stringArray);
+
+    StringArrayDeinitialize(&otherStringArray);
 }
 
 TEST(StringArrayTests, StringArrayInitialLength) {

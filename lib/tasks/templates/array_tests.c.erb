@@ -15,6 +15,8 @@ TEST_SETUP(<%= @type.name_camelized %>ArrayTests) {
 
 TEST_TEAR_DOWN(<%= @type.name_camelized %>ArrayTests) {
     <%= @type.name_camelized %>ArrayDeinitialize(&<%= @type.name_lower_camelized %>Array);
+
+    <%= @type.name_camelized %>ArrayDeinitialize(&other<%= @type.name_camelized %>Array);
 }
 
 TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayInitialLength) {

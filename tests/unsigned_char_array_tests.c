@@ -15,6 +15,8 @@ TEST_SETUP(UnsignedCharArrayTests) {
 
 TEST_TEAR_DOWN(UnsignedCharArrayTests) {
     UnsignedCharArrayDeinitialize(&unsignedCharArray);
+
+    UnsignedCharArrayDeinitialize(&otherUnsignedCharArray);
 }
 
 TEST(UnsignedCharArrayTests, UnsignedCharArrayInitialLength) {

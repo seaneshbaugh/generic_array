@@ -15,6 +15,8 @@ TEST_SETUP(DoubleArrayTests) {
 
 TEST_TEAR_DOWN(DoubleArrayTests) {
     DoubleArrayDeinitialize(&doubleArray);
+
+    DoubleArrayDeinitialize(&otherDoubleArray);
 }
 
 TEST(DoubleArrayTests, DoubleArrayInitialLength) {

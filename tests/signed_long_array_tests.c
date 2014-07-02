@@ -15,6 +15,8 @@ TEST_SETUP(SignedLongArrayTests) {
 
 TEST_TEAR_DOWN(SignedLongArrayTests) {
     SignedLongArrayDeinitialize(&signedLongArray);
+
+    SignedLongArrayDeinitialize(&otherSignedLongArray);
 }
 
 TEST(SignedLongArrayTests, SignedLongArrayInitialLength) {
