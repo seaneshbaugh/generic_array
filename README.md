@@ -1,5 +1,7 @@
 # C Generic Arrays
 
+[![Travis](https://api.travis-ci.org/seaneshbaugh/generic_array.png)](http://travis-ci.org/seaneshbaugh/generic_array)
+
 A library that abuses C pre-processor macros to generate code for array data structures for nearly any underlying datatype. Just redefine some macros and then include generic_array.h to create a new set of functions. Out of the box 29 basic data types are supported. Adding your own should be trivial.
 
 "Generic" is a bit of a misnomer.
