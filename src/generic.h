@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 #define PASTE(a, b) a##b
 #define MAKE_FUNCTION(return_type, prefix, name, ...) return_type PASTE(prefix, name) (__VA_ARGS__)
