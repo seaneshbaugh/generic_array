@@ -458,3 +458,25 @@ TEST(ShortArrayTests, ShortArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, shortArray.length);
 }
+
+TEST(ShortArrayTests, ShortArrayEmptyArrayIsEmpty) {
+    int result = ShortArrayIsEmpty(&shortArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(ShortArrayTests, ShortArrayNonEmptyArrayIsNotEmpty) {
+    ShortArrayPush(&shortArray, 1);
+
+    ShortArrayPush(&shortArray, 2);
+
+    ShortArrayPush(&shortArray, 3);
+
+    ShortArrayPush(&shortArray, 4);
+
+    ShortArrayPush(&shortArray, 5);
+
+    int result = ShortArrayIsEmpty(&shortArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

@@ -458,3 +458,25 @@ TEST(LongArrayTests, LongArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, longArray.length);
 }
+
+TEST(LongArrayTests, LongArrayEmptyArrayIsEmpty) {
+    int result = LongArrayIsEmpty(&longArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(LongArrayTests, LongArrayNonEmptyArrayIsNotEmpty) {
+    LongArrayPush(&longArray, 1L);
+
+    LongArrayPush(&longArray, 2L);
+
+    LongArrayPush(&longArray, 3L);
+
+    LongArrayPush(&longArray, 4L);
+
+    LongArrayPush(&longArray, 5L);
+
+    int result = LongArrayIsEmpty(&longArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

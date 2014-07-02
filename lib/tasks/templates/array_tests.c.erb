@@ -458,3 +458,25 @@ TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayDrop
 
     TEST_ASSERT_EQUAL(0, <%= @type.name_lower_camelized %>Array.length);
 }
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayEmptyArrayIsEmpty) {
+    int result = <%= @type.name_camelized %>ArrayIsEmpty(&<%= @type.name_lower_camelized %>Array);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayNonEmptyArrayIsNotEmpty) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[4] %>);
+
+    int result = <%= @type.name_camelized %>ArrayIsEmpty(&<%= @type.name_lower_camelized %>Array);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

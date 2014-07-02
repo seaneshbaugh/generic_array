@@ -105,6 +105,8 @@ class Tests < Thor
       DropManyEmptyArray
       DropLessThanArrayLength
       DropGreaterThanArrayLength
+      EmptyArrayIsEmpty
+      NonEmptyArrayIsNotEmpty
     )
 
     template('templates/all_tests.c.erb', 'tests/all_tests.c', force: options[:force])

@@ -458,3 +458,25 @@ TEST(SignedCharArrayTests, SignedCharArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, signedCharArray.length);
 }
+
+TEST(SignedCharArrayTests, SignedCharArrayEmptyArrayIsEmpty) {
+    int result = SignedCharArrayIsEmpty(&signedCharArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(SignedCharArrayTests, SignedCharArrayNonEmptyArrayIsNotEmpty) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    SignedCharArrayPush(&signedCharArray, 'E');
+
+    int result = SignedCharArrayIsEmpty(&signedCharArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

@@ -458,3 +458,25 @@ TEST(CharArrayTests, CharArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, charArray.length);
 }
+
+TEST(CharArrayTests, CharArrayEmptyArrayIsEmpty) {
+    int result = CharArrayIsEmpty(&charArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(CharArrayTests, CharArrayNonEmptyArrayIsNotEmpty) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    int result = CharArrayIsEmpty(&charArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

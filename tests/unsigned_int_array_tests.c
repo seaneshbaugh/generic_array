@@ -458,3 +458,25 @@ TEST(UnsignedIntArrayTests, UnsignedIntArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, unsignedIntArray.length);
 }
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayEmptyArrayIsEmpty) {
+    int result = UnsignedIntArrayIsEmpty(&unsignedIntArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayNonEmptyArrayIsNotEmpty) {
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 2U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 5U);
+
+    int result = UnsignedIntArrayIsEmpty(&unsignedIntArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}

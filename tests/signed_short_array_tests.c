@@ -458,3 +458,25 @@ TEST(SignedShortArrayTests, SignedShortArrayDropGreaterThanArrayLength) {
 
     TEST_ASSERT_EQUAL(0, signedShortArray.length);
 }
+
+TEST(SignedShortArrayTests, SignedShortArrayEmptyArrayIsEmpty) {
+    int result = SignedShortArrayIsEmpty(&signedShortArray);
+
+    TEST_ASSERT_EQUAL(1, result);
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayNonEmptyArrayIsNotEmpty) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    SignedShortArrayPush(&signedShortArray, 5);
+
+    int result = SignedShortArrayIsEmpty(&signedShortArray);
+
+    TEST_ASSERT_EQUAL(0, result);
+}
