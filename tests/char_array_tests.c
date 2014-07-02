@@ -480,3 +480,49 @@ TEST(CharArrayTests, CharArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(CharArrayTests, CharArrayPush) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    TEST_ASSERT_EQUAL(5, charArray.length);
+
+    char x;
+
+    int result = CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    result = CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    result = CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    result = CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    result = CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}

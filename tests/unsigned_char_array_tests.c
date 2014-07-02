@@ -480,3 +480,49 @@ TEST(UnsignedCharArrayTests, UnsignedCharArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(UnsignedCharArrayTests, UnsignedCharArrayPush) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'E');
+
+    TEST_ASSERT_EQUAL(5, unsignedCharArray.length);
+
+    unsigned char x;
+
+    int result = UnsignedCharArrayAt(&unsignedCharArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}

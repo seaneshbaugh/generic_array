@@ -480,3 +480,49 @@ TEST(ShortArrayTests, ShortArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(ShortArrayTests, ShortArrayPush) {
+    ShortArrayPush(&shortArray, 1);
+
+    ShortArrayPush(&shortArray, 2);
+
+    ShortArrayPush(&shortArray, 3);
+
+    ShortArrayPush(&shortArray, 4);
+
+    ShortArrayPush(&shortArray, 5);
+
+    TEST_ASSERT_EQUAL(5, shortArray.length);
+
+    short x;
+
+    int result = ShortArrayAt(&shortArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    result = ShortArrayAt(&shortArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    result = ShortArrayAt(&shortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    result = ShortArrayAt(&shortArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    result = ShortArrayAt(&shortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}

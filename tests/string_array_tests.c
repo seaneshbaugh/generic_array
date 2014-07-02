@@ -480,3 +480,49 @@ TEST(StringArrayTests, StringArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(StringArrayTests, StringArrayPush) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    TEST_ASSERT_EQUAL(5, stringArray.length);
+
+    char* x;
+
+    int result = StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 1", x);
+
+    result = StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 2", x);
+
+    result = StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 3", x);
+
+    result = StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 4", x);
+
+    result = StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 5", x);
+}

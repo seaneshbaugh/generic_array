@@ -480,3 +480,49 @@ TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayNonEmptyArrayIsNotEm
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPush) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 5ULL);
+
+    TEST_ASSERT_EQUAL(5, unsignedLongLongIntArray.length);
+
+    unsigned long long int x;
+
+    int result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1ULL, x);
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2ULL, x);
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3ULL, x);
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4ULL, x);
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5ULL, x);
+}

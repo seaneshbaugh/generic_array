@@ -480,3 +480,49 @@ TEST(DoubleArrayTests, DoubleArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(DoubleArrayTests, DoubleArrayPush) {
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 2.0);
+
+    DoubleArrayPush(&doubleArray, 3.0);
+
+    DoubleArrayPush(&doubleArray, 4.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    TEST_ASSERT_EQUAL(5, doubleArray.length);
+
+    double x;
+
+    int result = DoubleArrayAt(&doubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    result = DoubleArrayAt(&doubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2.0, x);
+
+    result = DoubleArrayAt(&doubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3.0, x);
+
+    result = DoubleArrayAt(&doubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    result = DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+}

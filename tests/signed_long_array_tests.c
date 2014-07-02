@@ -480,3 +480,49 @@ TEST(SignedLongArrayTests, SignedLongArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(SignedLongArrayTests, SignedLongArrayPush) {
+    SignedLongArrayPush(&signedLongArray, 1L);
+
+    SignedLongArrayPush(&signedLongArray, 2L);
+
+    SignedLongArrayPush(&signedLongArray, 3L);
+
+    SignedLongArrayPush(&signedLongArray, 4L);
+
+    SignedLongArrayPush(&signedLongArray, 5L);
+
+    TEST_ASSERT_EQUAL(5, signedLongArray.length);
+
+    signed long x;
+
+    int result = SignedLongArrayAt(&signedLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    result = SignedLongArrayAt(&signedLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    result = SignedLongArrayAt(&signedLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    result = SignedLongArrayAt(&signedLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    result = SignedLongArrayAt(&signedLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5L, x);
+}

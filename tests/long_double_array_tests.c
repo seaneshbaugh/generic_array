@@ -480,3 +480,49 @@ TEST(LongDoubleArrayTests, LongDoubleArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(LongDoubleArrayTests, LongDoubleArrayPush) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    TEST_ASSERT_EQUAL(5, longDoubleArray.length);
+
+    long double x;
+
+    int result = LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    result = LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    result = LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    result = LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    result = LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}

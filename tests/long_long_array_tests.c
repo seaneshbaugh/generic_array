@@ -480,3 +480,49 @@ TEST(LongLongArrayTests, LongLongArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(LongLongArrayTests, LongLongArrayPush) {
+    LongLongArrayPush(&longLongArray, 1);
+
+    LongLongArrayPush(&longLongArray, 2);
+
+    LongLongArrayPush(&longLongArray, 3);
+
+    LongLongArrayPush(&longLongArray, 4);
+
+    LongLongArrayPush(&longLongArray, 5);
+
+    TEST_ASSERT_EQUAL(5, longLongArray.length);
+
+    long long x;
+
+    int result = LongLongArrayAt(&longLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    result = LongLongArrayAt(&longLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    result = LongLongArrayAt(&longLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    result = LongLongArrayAt(&longLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    result = LongLongArrayAt(&longLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}

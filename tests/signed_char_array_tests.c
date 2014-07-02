@@ -480,3 +480,49 @@ TEST(SignedCharArrayTests, SignedCharArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(SignedCharArrayTests, SignedCharArrayPush) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    SignedCharArrayPush(&signedCharArray, 'E');
+
+    TEST_ASSERT_EQUAL(5, signedCharArray.length);
+
+    signed char x;
+
+    int result = SignedCharArrayAt(&signedCharArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    result = SignedCharArrayAt(&signedCharArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    result = SignedCharArrayAt(&signedCharArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    result = SignedCharArrayAt(&signedCharArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    result = SignedCharArrayAt(&signedCharArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}

@@ -480,3 +480,49 @@ TEST(SignedIntArrayTests, SignedIntArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(SignedIntArrayTests, SignedIntArrayPush) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    SignedIntArrayPush(&signedIntArray, 5);
+
+    TEST_ASSERT_EQUAL(5, signedIntArray.length);
+
+    signed int x;
+
+    int result = SignedIntArrayAt(&signedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    result = SignedIntArrayAt(&signedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    result = SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    result = SignedIntArrayAt(&signedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    result = SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}

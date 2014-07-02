@@ -480,3 +480,49 @@ TEST(UnsignedShortIntArrayTests, UnsignedShortIntArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(UnsignedShortIntArrayTests, UnsignedShortIntArrayPush) {
+    UnsignedShortIntArrayPush(&unsignedShortIntArray, 1U);
+
+    UnsignedShortIntArrayPush(&unsignedShortIntArray, 2U);
+
+    UnsignedShortIntArrayPush(&unsignedShortIntArray, 3U);
+
+    UnsignedShortIntArrayPush(&unsignedShortIntArray, 4U);
+
+    UnsignedShortIntArrayPush(&unsignedShortIntArray, 5U);
+
+    TEST_ASSERT_EQUAL(5, unsignedShortIntArray.length);
+
+    unsigned short int x;
+
+    int result = UnsignedShortIntArrayAt(&unsignedShortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    result = UnsignedShortIntArrayAt(&unsignedShortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2U, x);
+
+    result = UnsignedShortIntArrayAt(&unsignedShortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3U, x);
+
+    result = UnsignedShortIntArrayAt(&unsignedShortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    result = UnsignedShortIntArrayAt(&unsignedShortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}

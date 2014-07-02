@@ -480,3 +480,49 @@ TEST(FloatArrayTests, FloatArrayNonEmptyArrayIsNotEmpty) {
 
     TEST_ASSERT_EQUAL(0, result);
 }
+
+TEST(FloatArrayTests, FloatArrayPush) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    TEST_ASSERT_EQUAL(5, floatArray.length);
+
+    float x;
+
+    int result = FloatArrayAt(&floatArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    result = FloatArrayAt(&floatArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(2.0F, x);
+
+    result = FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(3.0F, x);
+
+    result = FloatArrayAt(&floatArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    result = FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
