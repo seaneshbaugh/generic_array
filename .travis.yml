@@ -9,4 +9,6 @@ before_install:
   - if [ "$CC" = "gcc" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 before_script:
   - if [ "$CC" = "gcc-4.8" ]; then $CC --version; fi
-script: make all
+script:
+  - thor patch:unity_malloc
+  - make all
