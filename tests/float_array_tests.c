@@ -526,3 +526,25 @@ TEST(FloatArrayTests, FloatArrayPush) {
 
     TEST_ASSERT_EQUAL(5.0F, x);
 }
+
+TEST(FloatArrayTests, FloatArrayMultipleElementArrayToString) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    char* asString;
+
+    int result = FloatArrayToString(&floatArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1.000000, 2.000000, 3.000000, 4.000000, 5.000000]", asString);
+
+    free(asString);
+}

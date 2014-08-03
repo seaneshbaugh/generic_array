@@ -526,3 +526,25 @@ TEST(StringArrayTests, StringArrayPush) {
 
     TEST_ASSERT_EQUAL("test 5", x);
 }
+
+TEST(StringArrayTests, StringArrayMultipleElementArrayToString) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    char* asString;
+
+    int result = StringArrayToString(&stringArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[\"test 1\", \"test 2\", \"test 3\", \"test 4\", \"test 5\"]", asString);
+
+    free(asString);
+}

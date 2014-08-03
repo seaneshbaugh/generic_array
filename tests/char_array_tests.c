@@ -526,3 +526,25 @@ TEST(CharArrayTests, CharArrayPush) {
 
     TEST_ASSERT_EQUAL('E', x);
 }
+
+TEST(CharArrayTests, CharArrayMultipleElementArrayToString) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    char* asString;
+
+    int result = CharArrayToString(&charArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("['A', 'B', 'C', 'D', 'E']", asString);
+
+    free(asString);
+}

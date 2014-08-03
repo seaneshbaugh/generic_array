@@ -526,3 +526,25 @@ TEST(LongDoubleArrayTests, LongDoubleArrayPush) {
 
     TEST_ASSERT_EQUAL(5.0L, x);
 }
+
+TEST(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    char* asString;
+
+    int result = LongDoubleArrayToString(&longDoubleArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1.000000, 2.000000, 3.000000, 4.000000, 5.000000]", asString);
+
+    free(asString);
+}

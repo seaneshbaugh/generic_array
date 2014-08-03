@@ -526,3 +526,25 @@ TEST(UnsignedShortArrayTests, UnsignedShortArrayPush) {
 
     TEST_ASSERT_EQUAL(5U, x);
 }
+
+TEST(UnsignedShortArrayTests, UnsignedShortArrayMultipleElementArrayToString) {
+    UnsignedShortArrayPush(&unsignedShortArray, 1U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 2U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 3U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 4U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 5U);
+
+    char* asString;
+
+    int result = UnsignedShortArrayToString(&unsignedShortArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
+
+    free(asString);
+}

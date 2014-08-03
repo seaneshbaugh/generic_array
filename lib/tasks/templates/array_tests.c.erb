@@ -526,3 +526,25 @@ TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayPush
 
     TEST_ASSERT_EQUAL(<%= @type.test_values[4] %>, x);
 }
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayMultipleElementArrayToString) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[4] %>);
+
+    char* asString;
+
+    int result = <%= @type.name_camelized %>ArrayToString(&<%= @type.name_lower_camelized %>Array, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("<%= @type.as_string %>", asString);
+
+    free(asString);
+}

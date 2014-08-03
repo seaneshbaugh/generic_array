@@ -526,3 +526,25 @@ TEST(DoubleArrayTests, DoubleArrayPush) {
 
     TEST_ASSERT_EQUAL(5.0, x);
 }
+
+TEST(DoubleArrayTests, DoubleArrayMultipleElementArrayToString) {
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 2.0);
+
+    DoubleArrayPush(&doubleArray, 3.0);
+
+    DoubleArrayPush(&doubleArray, 4.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    char* asString;
+
+    int result = DoubleArrayToString(&doubleArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1.000000, 2.000000, 3.000000, 4.000000, 5.000000]", asString);
+
+    free(asString);
+}

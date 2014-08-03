@@ -526,3 +526,25 @@ TEST(SignedLongLongIntArrayTests, SignedLongLongIntArrayPush) {
 
     TEST_ASSERT_EQUAL(5LL, x);
 }
+
+TEST(SignedLongLongIntArrayTests, SignedLongLongIntArrayMultipleElementArrayToString) {
+    SignedLongLongIntArrayPush(&signedLongLongIntArray, 1LL);
+
+    SignedLongLongIntArrayPush(&signedLongLongIntArray, 2LL);
+
+    SignedLongLongIntArrayPush(&signedLongLongIntArray, 3LL);
+
+    SignedLongLongIntArrayPush(&signedLongLongIntArray, 4LL);
+
+    SignedLongLongIntArrayPush(&signedLongLongIntArray, 5LL);
+
+    char* asString;
+
+    int result = SignedLongLongIntArrayToString(&signedLongLongIntArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
+
+    free(asString);
+}

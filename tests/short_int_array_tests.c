@@ -526,3 +526,25 @@ TEST(ShortIntArrayTests, ShortIntArrayPush) {
 
     TEST_ASSERT_EQUAL(5, x);
 }
+
+TEST(ShortIntArrayTests, ShortIntArrayMultipleElementArrayToString) {
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArrayPush(&shortIntArray, 2);
+
+    ShortIntArrayPush(&shortIntArray, 3);
+
+    ShortIntArrayPush(&shortIntArray, 4);
+
+    ShortIntArrayPush(&shortIntArray, 5);
+
+    char* asString;
+
+    int result = ShortIntArrayToString(&shortIntArray, &asString);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
+
+    free(asString);
+}
