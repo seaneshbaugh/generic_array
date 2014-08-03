@@ -548,3 +548,69 @@ TEST(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString) {
 
     free(asString);
 }
+
+int LongDoubleAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int LongDoubleDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySortAscending) {
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArraySort(&longDoubleArray, LongDoubleAscendingCompare);
+
+    long double x;
+
+    LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}

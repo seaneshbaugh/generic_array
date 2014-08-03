@@ -548,3 +548,69 @@ TEST(StringArrayTests, StringArrayMultipleElementArrayToString) {
 
     free(asString);
 }
+
+int StringAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int StringDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(StringArrayTests, StringArraySortAscending) {
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArraySort(&stringArray, StringAscendingCompare);
+
+    char* x;
+
+    StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 2", x);
+
+    StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 3", x);
+
+    StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+}

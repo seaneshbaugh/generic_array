@@ -33,6 +33,7 @@ TEST_GROUP_RUNNER(CharArrayTests) {
     RUN_TEST_CASE(CharArrayTests, CharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(CharArrayTests, CharArrayPush);
     RUN_TEST_CASE(CharArrayTests, CharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(CharArrayTests, CharArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(DoubleArrayTests) {
@@ -68,6 +69,7 @@ TEST_GROUP_RUNNER(DoubleArrayTests) {
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayPush);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(FloatArrayTests) {
@@ -103,6 +105,7 @@ TEST_GROUP_RUNNER(FloatArrayTests) {
     RUN_TEST_CASE(FloatArrayTests, FloatArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayPush);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(FloatArrayTests, FloatArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(IntArrayTests) {
@@ -138,6 +141,7 @@ TEST_GROUP_RUNNER(IntArrayTests) {
     RUN_TEST_CASE(IntArrayTests, IntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(IntArrayTests, IntArrayPush);
     RUN_TEST_CASE(IntArrayTests, IntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(IntArrayTests, IntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(LongArrayTests) {
@@ -173,6 +177,7 @@ TEST_GROUP_RUNNER(LongArrayTests) {
     RUN_TEST_CASE(LongArrayTests, LongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongArrayTests, LongArrayPush);
     RUN_TEST_CASE(LongArrayTests, LongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongArrayTests, LongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(LongDoubleArrayTests) {
@@ -208,6 +213,7 @@ TEST_GROUP_RUNNER(LongDoubleArrayTests) {
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayPush);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(LongIntArrayTests) {
@@ -243,6 +249,7 @@ TEST_GROUP_RUNNER(LongIntArrayTests) {
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayPush);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(LongLongArrayTests) {
@@ -278,6 +285,7 @@ TEST_GROUP_RUNNER(LongLongArrayTests) {
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayPush);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(LongLongIntArrayTests) {
@@ -313,6 +321,7 @@ TEST_GROUP_RUNNER(LongLongIntArrayTests) {
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayPush);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(ShortArrayTests) {
@@ -348,6 +357,7 @@ TEST_GROUP_RUNNER(ShortArrayTests) {
     RUN_TEST_CASE(ShortArrayTests, ShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayPush);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(ShortArrayTests, ShortArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(ShortIntArrayTests) {
@@ -383,6 +393,7 @@ TEST_GROUP_RUNNER(ShortIntArrayTests) {
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayPush);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedCharArrayTests) {
@@ -418,6 +429,7 @@ TEST_GROUP_RUNNER(SignedCharArrayTests) {
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayPush);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedIntArrayTests) {
@@ -453,6 +465,7 @@ TEST_GROUP_RUNNER(SignedIntArrayTests) {
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayPush);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedLongArrayTests) {
@@ -488,6 +501,7 @@ TEST_GROUP_RUNNER(SignedLongArrayTests) {
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayPush);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
@@ -523,6 +537,7 @@ TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayPush);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
@@ -558,6 +573,7 @@ TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayPush);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
@@ -593,6 +609,7 @@ TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayPush);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedShortArrayTests) {
@@ -628,6 +645,7 @@ TEST_GROUP_RUNNER(SignedShortArrayTests) {
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayPush);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
@@ -663,6 +681,7 @@ TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayPush);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(StringArrayTests) {
@@ -698,6 +717,7 @@ TEST_GROUP_RUNNER(StringArrayTests) {
     RUN_TEST_CASE(StringArrayTests, StringArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(StringArrayTests, StringArrayPush);
     RUN_TEST_CASE(StringArrayTests, StringArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(StringArrayTests, StringArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedArrayTests) {
@@ -733,6 +753,7 @@ TEST_GROUP_RUNNER(UnsignedArrayTests) {
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayPush);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
@@ -768,6 +789,7 @@ TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayPush);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
@@ -803,6 +825,7 @@ TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayPush);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
@@ -838,6 +861,7 @@ TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayPush);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
@@ -873,6 +897,7 @@ TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
@@ -908,6 +933,7 @@ TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayPush);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
@@ -943,6 +969,7 @@ TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
@@ -978,6 +1005,7 @@ TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayPush);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySortAscending);
 }
 
 TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
@@ -1013,6 +1041,7 @@ TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayPush);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySortAscending);
 }
 
 static void RunAllTests(void) {

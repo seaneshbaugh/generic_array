@@ -64,13 +64,13 @@
 
 #define GENERIC_ARRAY_VALUES_NOT_EQUAL(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) != 0
 
-#define GENERIC_ARRAY_VALUES_GREATER_THAN(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 1
+#define GENERIC_ARRAY_VALUES_GREATER_THAN(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) > 0
 
-#define GENERIC_ARRAY_VALUES_GREATER_THAN_OR_EQUAL(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 1 || strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 0
+#define GENERIC_ARRAY_VALUES_GREATER_THAN_OR_EQUAL(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) > 0 || strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 0
 
-#define GENERIC_ARRAY_VALUES_LESS_THAN(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == -1
+#define GENERIC_ARRAY_VALUES_LESS_THAN(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) < 0
 
-#define GENERIC_ARRAY_VALUES_LESS_THAN_OR_EQUAL(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == -1 || strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 0
+#define GENERIC_ARRAY_VALUES_LESS_THAN_OR_EQUAL(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) < 0 || strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b))) == 0
 
 #define GENERIC_ARRAY_COMPARE_VALUES(a, b) strncmp(a, b, strlen(a) < strlen(b) ? strlen(a) : (strlen(b)))
 

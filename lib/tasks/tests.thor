@@ -3,9 +3,9 @@ require 'bundler/setup'
 Bundler.require(:default)
 
 class TestDataType
-  attr_accessor :name, :name_camelized, :name_lower_camelized, :name_for_casting, :test_values, :loop_value, :as_string
+  attr_accessor :name, :name_camelized, :name_lower_camelized, :name_for_casting, :assert_function, :test_values, :loop_value, :as_string
 
-  def initialize(name, test_values, loop_value, as_string_values, name_for_casting_override = nil)
+  def initialize(name, test_values, loop_value, as_string_values, name_for_casting_override = nil, assert_function = nil)
     self.name = name
 
     self.name_camelized = name.camelize
@@ -16,6 +16,12 @@ class TestDataType
       self.name_for_casting = name_for_casting_override
     else
       self.name_for_casting = name.humanize.downcase
+    end
+
+    if assert_function.present?
+      self.assert_function = assert_function
+    else
+      self.assert_function = 'TEST_ASSERT_EQUAL'
     end
 
     self.test_values = test_values
@@ -56,7 +62,7 @@ class Tests < Thor
       TestDataType.new('signed_long_long_int', ['1LL', '2LL', '3LL', '4LL', '5LL'], 'i', ['1', '2', '3', '4', '5']),
       TestDataType.new('signed_short', ['1', '2', '3', '4', '5'], 'i', ['1', '2', '3', '4', '5']),
       TestDataType.new('signed_short_int', ['1', '2', '3', '4', '5'], 'i', ['1', '2', '3', '4', '5']),
-      TestDataType.new('string', ['"test 1"', '"test 2"', '"test 3"', '"test 4"', '"test 5"'], '"test"', ['\"test 1\"', '\"test 2\"', '\"test 3\"', '\"test 4\"', '\"test 5\"'], 'char*'),
+      TestDataType.new('string', ['"test 1"', '"test 2"', '"test 3"', '"test 4"', '"test 5"'], '"test"', ['\"test 1\"', '\"test 2\"', '\"test 3\"', '\"test 4\"', '\"test 5\"'], 'char*', 'TEST_ASSERT_EQUAL_STRING'),
       TestDataType.new('unsigned', ['1', '2', '3', '4', '5'], 'i', ['1', '2', '3', '4', '5']),
       TestDataType.new('unsigned_char', ["'A'", "'B'", "'C'", "'D'", "'E'"], '(i % 255)', ["'A'", "'B'", "'C'", "'D'", "'E'"]),
       TestDataType.new('unsigned_int', ['1U', '2U', '3U', '4U', '5U'], 'i', ['1', '2', '3', '4', '5']),
@@ -111,6 +117,7 @@ class Tests < Thor
       NonEmptyArrayIsNotEmpty
       Push
       MultipleElementArrayToString
+      SortAscending
     )
 
     template('templates/all_tests.c.erb', 'tests/all_tests.c', force: options[:force])

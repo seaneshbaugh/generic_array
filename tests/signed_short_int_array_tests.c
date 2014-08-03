@@ -548,3 +548,69 @@ TEST(SignedShortIntArrayTests, SignedShortIntArrayMultipleElementArrayToString) 
 
     free(asString);
 }
+
+int SignedShortIntAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int SignedShortIntDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(SignedShortIntArrayTests, SignedShortIntArraySortAscending) {
+    SignedShortIntArrayPush(&signedShortIntArray, 3);
+
+    SignedShortIntArrayPush(&signedShortIntArray, 2);
+
+    SignedShortIntArrayPush(&signedShortIntArray, 4);
+
+    SignedShortIntArrayPush(&signedShortIntArray, 5);
+
+    SignedShortIntArrayPush(&signedShortIntArray, 1);
+
+    SignedShortIntArraySort(&signedShortIntArray, SignedShortIntAscendingCompare);
+
+    signed short int x;
+
+    SignedShortIntArrayAt(&signedShortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortIntArrayAt(&signedShortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedShortIntArrayAt(&signedShortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedShortIntArrayAt(&signedShortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortIntArrayAt(&signedShortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}

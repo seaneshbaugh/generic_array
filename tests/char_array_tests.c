@@ -548,3 +548,69 @@ TEST(CharArrayTests, CharArrayMultipleElementArrayToString) {
 
     free(asString);
 }
+
+int CharAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int CharDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(CharArrayTests, CharArraySortAscending) {
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    CharArrayPush(&charArray, 'A');
+
+    CharArraySort(&charArray, CharAscendingCompare);
+
+    char x;
+
+    CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+}

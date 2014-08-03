@@ -548,3 +548,69 @@ TEST(UnsignedCharArrayTests, UnsignedCharArrayMultipleElementArrayToString) {
 
     free(asString);
 }
+
+int UnsignedCharAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int UnsignedCharDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySortAscending) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'E');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArraySort(&unsignedCharArray, UnsignedCharAscendingCompare);
+
+    unsigned char x;
+
+    UnsignedCharArrayAt(&unsignedCharArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    UnsignedCharArrayAt(&unsignedCharArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    UnsignedCharArrayAt(&unsignedCharArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    UnsignedCharArrayAt(&unsignedCharArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    UnsignedCharArrayAt(&unsignedCharArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+}

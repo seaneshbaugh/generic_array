@@ -548,3 +548,69 @@ TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayMult
 
     free(asString);
 }
+
+int <%= @type.name_camelized %>AscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int <%= @type.name_camelized %>DescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySortAscending) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[4] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArraySort(&<%= @type.name_lower_camelized %>Array, <%= @type.name_camelized %>AscendingCompare);
+
+    <%= @type.name_for_casting %> x;
+
+    <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 0, &x);
+
+    <%= @type.assert_function %>(<%= @type.test_values[0] %>, x);
+
+    <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 1, &x);
+
+    <%= @type.assert_function %>(<%= @type.test_values[1] %>, x);
+
+    <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 2, &x);
+
+    <%= @type.assert_function %>(<%= @type.test_values[2] %>, x);
+
+    <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 3, &x);
+
+    <%= @type.assert_function %>(<%= @type.test_values[3] %>, x);
+
+    <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 4, &x);
+
+    <%= @type.assert_function %>(<%= @type.test_values[4] %>, x);
+}

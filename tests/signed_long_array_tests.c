@@ -548,3 +548,69 @@ TEST(SignedLongArrayTests, SignedLongArrayMultipleElementArrayToString) {
 
     free(asString);
 }
+
+int SignedLongAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int SignedLongDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(SignedLongArrayTests, SignedLongArraySortAscending) {
+    SignedLongArrayPush(&signedLongArray, 3L);
+
+    SignedLongArrayPush(&signedLongArray, 2L);
+
+    SignedLongArrayPush(&signedLongArray, 4L);
+
+    SignedLongArrayPush(&signedLongArray, 5L);
+
+    SignedLongArrayPush(&signedLongArray, 1L);
+
+    SignedLongArraySort(&signedLongArray, SignedLongAscendingCompare);
+
+    signed long x;
+
+    SignedLongArrayAt(&signedLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    SignedLongArrayAt(&signedLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    SignedLongArrayAt(&signedLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    SignedLongArrayAt(&signedLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    SignedLongArrayAt(&signedLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+}

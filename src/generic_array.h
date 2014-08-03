@@ -170,6 +170,10 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Push, __GENERIC_ARRAY_NAME__ *array, 
     return GA_SUCCESS;
 }
 
+MAKE_FUNCTION(void, __GENERIC_ARRAY_NAME__, Sort, __GENERIC_ARRAY_NAME__ *array, int (*comparisonFunction)(const void*, const void*)) {
+    qsort(array->values, array->length, sizeof(__GENERIC_ARRAY_TYPE__), comparisonFunction);
+}
+
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, ToString, __GENERIC_ARRAY_NAME__ *array, char **result) {
     int i;
 

@@ -548,3 +548,69 @@ TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayMultipleElementArray
 
     free(asString);
 }
+
+int UnsignedLongLongIntAscendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+int UnsignedLongLongIntDescendingCompare(const void *a, const void *b) {
+    __GENERIC_ARRAY_TYPE__ f = *((__GENERIC_ARRAY_TYPE__*)a);
+    __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
+
+    if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
+      return  1;
+    }
+
+    if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
+      return -1;
+    }
+
+    return 0;
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortAscending) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 5ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArraySort(&unsignedLongLongIntArray, UnsignedLongLongIntAscendingCompare);
+
+    unsigned long long int x;
+
+    UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1ULL, x);
+
+    UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2ULL, x);
+
+    UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3ULL, x);
+
+    UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4ULL, x);
+
+    UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5ULL, x);
+}
