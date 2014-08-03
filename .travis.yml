@@ -10,5 +10,5 @@ before_install:
 before_script:
   - if [ "$CC" = "gcc-4.8" ]; then $CC --version; fi
 script:
-  - thor patch:unity_malloc
+  - thor patch:unity_malloc --force
   - make all
