@@ -554,11 +554,11 @@ int SignedIntAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int SignedIntDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySortEmptyArray) {
+    SignedIntArraySort(&signedIntArray, SignedIntAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, SignedIntArrayCount(&signedIntArray));
 }
 
 TEST(SignedIntArrayTests, SignedIntArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(SignedIntArrayTests, SignedIntArraySortAscending) {
     TEST_ASSERT_EQUAL(4, x);
 
     SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySortDescending) {
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    SignedIntArrayPush(&signedIntArray, 5);
+
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArraySort(&signedIntArray, SignedIntDescendingCompare);
+
+    signed int x;
+
+    SignedIntArrayAt(&signedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedIntArrayAt(&signedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedIntArrayAt(&signedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArrayOverlapEmptyArrays) {
+    int result = SignedIntArrayOverlap(&signedIntArray, &otherSignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedIntArrayCount(&signedIntArray));
+
+    TEST_ASSERT_EQUAL(0, SignedIntArrayCount(&otherSignedIntArray));
+}
+
+TEST(SignedIntArrayTests, SignedIntArrayOverlapNonEmptyArrayWithEmptyArray) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    SignedIntArrayPush(&signedIntArray, 5);
+
+    int result = SignedIntArrayOverlap(&signedIntArray, &otherSignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedIntArrayCount(&signedIntArray));
+
+    TEST_ASSERT_EQUAL(0, SignedIntArrayCount(&otherSignedIntArray));
+
+    SignedIntArraySort(&signedIntArray, SignedIntAscendingCompare);
+
+    signed int x;
+
+    SignedIntArrayAt(&signedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedIntArrayAt(&signedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedIntArrayAt(&signedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArrayOverlapEmptyArrayWithNonEmptyArray) {
+    SignedIntArrayPush(&otherSignedIntArray, 1);
+
+    SignedIntArrayPush(&otherSignedIntArray, 2);
+
+    SignedIntArrayPush(&otherSignedIntArray, 3);
+
+    SignedIntArrayPush(&otherSignedIntArray, 4);
+
+    SignedIntArrayPush(&otherSignedIntArray, 5);
+
+    int result = SignedIntArrayOverlap(&signedIntArray, &otherSignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedIntArrayCount(&signedIntArray));
+
+    TEST_ASSERT_EQUAL(5, SignedIntArrayCount(&otherSignedIntArray));
+
+    SignedIntArraySort(&signedIntArray, SignedIntAscendingCompare);
+
+    signed int x;
+
+    SignedIntArrayAt(&signedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedIntArrayAt(&signedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedIntArrayAt(&signedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArrayOverlapNonEmptyArrays) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    SignedIntArrayPush(&signedIntArray, 5);
+
+    SignedIntArrayPush(&signedIntArray, 5);
+
+    SignedIntArrayPush(&otherSignedIntArray, 1);
+
+    SignedIntArrayPush(&otherSignedIntArray, 2);
+
+    SignedIntArrayPush(&otherSignedIntArray, 3);
+
+    SignedIntArrayPush(&otherSignedIntArray, 4);
+
+    SignedIntArrayPush(&otherSignedIntArray, 4);
+
+    SignedIntArrayPush(&otherSignedIntArray, 5);
+
+    SignedIntArrayPush(&otherSignedIntArray, 5);
+
+    SignedIntArrayPush(&otherSignedIntArray, 5);
+
+    int result = SignedIntArrayOverlap(&signedIntArray, &otherSignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, SignedIntArrayCount(&signedIntArray));
+
+    TEST_ASSERT_EQUAL(8, SignedIntArrayCount(&otherSignedIntArray));
+
+    SignedIntArraySort(&signedIntArray, SignedIntAscendingCompare);
+
+    signed int x;
+
+    SignedIntArrayAt(&signedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedIntArrayAt(&signedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedIntArrayAt(&signedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedIntArrayAt(&signedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedIntArrayAt(&signedIntArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedIntArrayAt(&signedIntArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedIntArrayAt(&signedIntArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedIntArrayAt(&signedIntArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedIntArrayAt(&signedIntArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5, x);
 }

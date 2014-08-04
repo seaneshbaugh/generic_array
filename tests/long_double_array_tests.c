@@ -554,11 +554,11 @@ int LongDoubleAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int LongDoubleDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySortEmptyArray) {
+    LongDoubleArraySort(&longDoubleArray, LongDoubleAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, LongDoubleArrayCount(&longDoubleArray));
 }
 
 TEST(LongDoubleArrayTests, LongDoubleArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(LongDoubleArrayTests, LongDoubleArraySortAscending) {
     TEST_ASSERT_EQUAL(4.0L, x);
 
     LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySortDescending) {
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArraySort(&longDoubleArray, LongDoubleDescendingCompare);
+
+    long double x;
+
+    LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArrayOverlapEmptyArrays) {
+    int result = LongDoubleArrayOverlap(&longDoubleArray, &otherLongDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, LongDoubleArrayCount(&longDoubleArray));
+
+    TEST_ASSERT_EQUAL(0, LongDoubleArrayCount(&otherLongDoubleArray));
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArrayOverlapNonEmptyArrayWithEmptyArray) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    int result = LongDoubleArrayOverlap(&longDoubleArray, &otherLongDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongDoubleArrayCount(&longDoubleArray));
+
+    TEST_ASSERT_EQUAL(0, LongDoubleArrayCount(&otherLongDoubleArray));
+
+    LongDoubleArraySort(&longDoubleArray, LongDoubleAscendingCompare);
+
+    long double x;
+
+    LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArrayOverlapEmptyArrayWithNonEmptyArray) {
+    LongDoubleArrayPush(&otherLongDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 5.0L);
+
+    int result = LongDoubleArrayOverlap(&longDoubleArray, &otherLongDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongDoubleArrayCount(&longDoubleArray));
+
+    TEST_ASSERT_EQUAL(5, LongDoubleArrayCount(&otherLongDoubleArray));
+
+    LongDoubleArraySort(&longDoubleArray, LongDoubleAscendingCompare);
+
+    long double x;
+
+    LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArrayOverlapNonEmptyArrays) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 4.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 5.0L);
+
+    LongDoubleArrayPush(&otherLongDoubleArray, 5.0L);
+
+    int result = LongDoubleArrayOverlap(&longDoubleArray, &otherLongDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, LongDoubleArrayCount(&longDoubleArray));
+
+    TEST_ASSERT_EQUAL(8, LongDoubleArrayCount(&otherLongDoubleArray));
+
+    LongDoubleArraySort(&longDoubleArray, LongDoubleAscendingCompare);
+
+    long double x;
+
+    LongDoubleArrayAt(&longDoubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+
+    LongDoubleArrayAt(&longDoubleArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5.0L, x);
 }

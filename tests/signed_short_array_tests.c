@@ -554,11 +554,11 @@ int SignedShortAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int SignedShortDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySortEmptyArray) {
+    SignedShortArraySort(&signedShortArray, SignedShortAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, SignedShortArrayCount(&signedShortArray));
 }
 
 TEST(SignedShortArrayTests, SignedShortArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(SignedShortArrayTests, SignedShortArraySortAscending) {
     TEST_ASSERT_EQUAL(4, x);
 
     SignedShortArrayAt(&signedShortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySortDescending) {
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    SignedShortArrayPush(&signedShortArray, 5);
+
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArraySort(&signedShortArray, SignedShortDescendingCompare);
+
+    signed short x;
+
+    SignedShortArrayAt(&signedShortArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedShortArrayAt(&signedShortArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortArrayAt(&signedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedShortArrayAt(&signedShortArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedShortArrayAt(&signedShortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayOverlapEmptyArrays) {
+    int result = SignedShortArrayOverlap(&signedShortArray, &otherSignedShortArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedShortArrayCount(&signedShortArray));
+
+    TEST_ASSERT_EQUAL(0, SignedShortArrayCount(&otherSignedShortArray));
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayOverlapNonEmptyArrayWithEmptyArray) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    SignedShortArrayPush(&signedShortArray, 5);
+
+    int result = SignedShortArrayOverlap(&signedShortArray, &otherSignedShortArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedShortArrayCount(&signedShortArray));
+
+    TEST_ASSERT_EQUAL(0, SignedShortArrayCount(&otherSignedShortArray));
+
+    SignedShortArraySort(&signedShortArray, SignedShortAscendingCompare);
+
+    signed short x;
+
+    SignedShortArrayAt(&signedShortArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortArrayAt(&signedShortArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedShortArrayAt(&signedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedShortArrayAt(&signedShortArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortArrayAt(&signedShortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayOverlapEmptyArrayWithNonEmptyArray) {
+    SignedShortArrayPush(&otherSignedShortArray, 1);
+
+    SignedShortArrayPush(&otherSignedShortArray, 2);
+
+    SignedShortArrayPush(&otherSignedShortArray, 3);
+
+    SignedShortArrayPush(&otherSignedShortArray, 4);
+
+    SignedShortArrayPush(&otherSignedShortArray, 5);
+
+    int result = SignedShortArrayOverlap(&signedShortArray, &otherSignedShortArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedShortArrayCount(&signedShortArray));
+
+    TEST_ASSERT_EQUAL(5, SignedShortArrayCount(&otherSignedShortArray));
+
+    SignedShortArraySort(&signedShortArray, SignedShortAscendingCompare);
+
+    signed short x;
+
+    SignedShortArrayAt(&signedShortArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortArrayAt(&signedShortArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedShortArrayAt(&signedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedShortArrayAt(&signedShortArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortArrayAt(&signedShortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayOverlapNonEmptyArrays) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    SignedShortArrayPush(&signedShortArray, 5);
+
+    SignedShortArrayPush(&signedShortArray, 5);
+
+    SignedShortArrayPush(&otherSignedShortArray, 1);
+
+    SignedShortArrayPush(&otherSignedShortArray, 2);
+
+    SignedShortArrayPush(&otherSignedShortArray, 3);
+
+    SignedShortArrayPush(&otherSignedShortArray, 4);
+
+    SignedShortArrayPush(&otherSignedShortArray, 4);
+
+    SignedShortArrayPush(&otherSignedShortArray, 5);
+
+    SignedShortArrayPush(&otherSignedShortArray, 5);
+
+    SignedShortArrayPush(&otherSignedShortArray, 5);
+
+    int result = SignedShortArrayOverlap(&signedShortArray, &otherSignedShortArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, SignedShortArrayCount(&signedShortArray));
+
+    TEST_ASSERT_EQUAL(8, SignedShortArrayCount(&otherSignedShortArray));
+
+    SignedShortArraySort(&signedShortArray, SignedShortAscendingCompare);
+
+    signed short x;
+
+    SignedShortArrayAt(&signedShortArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortArrayAt(&signedShortArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortArrayAt(&signedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    SignedShortArrayAt(&signedShortArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    SignedShortArrayAt(&signedShortArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    SignedShortArrayAt(&signedShortArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortArrayAt(&signedShortArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    SignedShortArrayAt(&signedShortArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedShortArrayAt(&signedShortArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    SignedShortArrayAt(&signedShortArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5, x);
 }

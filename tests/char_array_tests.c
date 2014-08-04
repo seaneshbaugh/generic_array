@@ -554,11 +554,11 @@ int CharAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int CharDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(CharArrayTests, CharArraySortEmptyArray) {
+    CharArraySort(&charArray, CharAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, CharArrayCount(&charArray));
 }
 
 TEST(CharArrayTests, CharArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(CharArrayTests, CharArraySortAscending) {
     TEST_ASSERT_EQUAL('D', x);
 
     CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArraySortDescending) {
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    CharArrayPush(&charArray, 'A');
+
+    CharArraySort(&charArray, CharDescendingCompare);
+
+    char x;
+
+    CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+
+    CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+}
+
+TEST(CharArrayTests, CharArrayOverlapEmptyArrays) {
+    int result = CharArrayOverlap(&charArray, &otherCharArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, CharArrayCount(&charArray));
+
+    TEST_ASSERT_EQUAL(0, CharArrayCount(&otherCharArray));
+}
+
+TEST(CharArrayTests, CharArrayOverlapNonEmptyArrayWithEmptyArray) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    int result = CharArrayOverlap(&charArray, &otherCharArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, CharArrayCount(&charArray));
+
+    TEST_ASSERT_EQUAL(0, CharArrayCount(&otherCharArray));
+
+    CharArraySort(&charArray, CharAscendingCompare);
+
+    char x;
+
+    CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArrayOverlapEmptyArrayWithNonEmptyArray) {
+    CharArrayPush(&otherCharArray, 'A');
+
+    CharArrayPush(&otherCharArray, 'B');
+
+    CharArrayPush(&otherCharArray, 'C');
+
+    CharArrayPush(&otherCharArray, 'D');
+
+    CharArrayPush(&otherCharArray, 'E');
+
+    int result = CharArrayOverlap(&charArray, &otherCharArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, CharArrayCount(&charArray));
+
+    TEST_ASSERT_EQUAL(5, CharArrayCount(&otherCharArray));
+
+    CharArraySort(&charArray, CharAscendingCompare);
+
+    char x;
+
+    CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArrayOverlapNonEmptyArrays) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    CharArrayPush(&charArray, 'E');
+
+    CharArrayPush(&charArray, 'E');
+
+    CharArrayPush(&otherCharArray, 'A');
+
+    CharArrayPush(&otherCharArray, 'B');
+
+    CharArrayPush(&otherCharArray, 'C');
+
+    CharArrayPush(&otherCharArray, 'D');
+
+    CharArrayPush(&otherCharArray, 'D');
+
+    CharArrayPush(&otherCharArray, 'E');
+
+    CharArrayPush(&otherCharArray, 'E');
+
+    CharArrayPush(&otherCharArray, 'E');
+
+    int result = CharArrayOverlap(&charArray, &otherCharArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, CharArrayCount(&charArray));
+
+    TEST_ASSERT_EQUAL(8, CharArrayCount(&otherCharArray));
+
+    CharArraySort(&charArray, CharAscendingCompare);
+
+    char x;
+
+    CharArrayAt(&charArray, 0, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 1, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL('A', x);
+
+    CharArrayAt(&charArray, 3, &x);
+
+    TEST_ASSERT_EQUAL('B', x);
+
+    CharArrayAt(&charArray, 4, &x);
+
+    TEST_ASSERT_EQUAL('C', x);
+
+    CharArrayAt(&charArray, 5, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 6, &x);
+
+    TEST_ASSERT_EQUAL('D', x);
+
+    CharArrayAt(&charArray, 7, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+
+    CharArrayAt(&charArray, 8, &x);
+
+    TEST_ASSERT_EQUAL('E', x);
+
+    CharArrayAt(&charArray, 9, &x);
 
     TEST_ASSERT_EQUAL('E', x);
 }

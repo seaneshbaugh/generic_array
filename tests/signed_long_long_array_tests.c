@@ -554,11 +554,11 @@ int SignedLongLongAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int SignedLongLongDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySortEmptyArray) {
+    SignedLongLongArraySort(&signedLongLongArray, SignedLongLongAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, SignedLongLongArrayCount(&signedLongLongArray));
 }
 
 TEST(SignedLongLongArrayTests, SignedLongLongArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(SignedLongLongArrayTests, SignedLongLongArraySortAscending) {
     TEST_ASSERT_EQUAL(4LL, x);
 
     SignedLongLongArrayAt(&signedLongLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySortDescending) {
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 5LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArraySort(&signedLongLongArray, SignedLongLongDescendingCompare);
+
+    signed long long x;
+
+    SignedLongLongArrayAt(&signedLongLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArrayOverlapEmptyArrays) {
+    int result = SignedLongLongArrayOverlap(&signedLongLongArray, &otherSignedLongLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedLongLongArrayCount(&signedLongLongArray));
+
+    TEST_ASSERT_EQUAL(0, SignedLongLongArrayCount(&otherSignedLongLongArray));
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArrayOverlapNonEmptyArrayWithEmptyArray) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 5LL);
+
+    int result = SignedLongLongArrayOverlap(&signedLongLongArray, &otherSignedLongLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedLongLongArrayCount(&signedLongLongArray));
+
+    TEST_ASSERT_EQUAL(0, SignedLongLongArrayCount(&otherSignedLongLongArray));
+
+    SignedLongLongArraySort(&signedLongLongArray, SignedLongLongAscendingCompare);
+
+    signed long long x;
+
+    SignedLongLongArrayAt(&signedLongLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArrayOverlapEmptyArrayWithNonEmptyArray) {
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 5LL);
+
+    int result = SignedLongLongArrayOverlap(&signedLongLongArray, &otherSignedLongLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedLongLongArrayCount(&signedLongLongArray));
+
+    TEST_ASSERT_EQUAL(5, SignedLongLongArrayCount(&otherSignedLongLongArray));
+
+    SignedLongLongArraySort(&signedLongLongArray, SignedLongLongAscendingCompare);
+
+    signed long long x;
+
+    SignedLongLongArrayAt(&signedLongLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArrayOverlapNonEmptyArrays) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 5LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 5LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 4LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 5LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 5LL);
+
+    SignedLongLongArrayPush(&otherSignedLongLongArray, 5LL);
+
+    int result = SignedLongLongArrayOverlap(&signedLongLongArray, &otherSignedLongLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, SignedLongLongArrayCount(&signedLongLongArray));
+
+    TEST_ASSERT_EQUAL(8, SignedLongLongArrayCount(&otherSignedLongLongArray));
+
+    SignedLongLongArraySort(&signedLongLongArray, SignedLongLongAscendingCompare);
+
+    signed long long x;
+
+    SignedLongLongArrayAt(&signedLongLongArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+
+    SignedLongLongArrayAt(&signedLongLongArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5LL, x);
 }

@@ -554,11 +554,11 @@ int LongAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int LongDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(LongArrayTests, LongArraySortEmptyArray) {
+    LongArraySort(&longArray, LongAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, LongArrayCount(&longArray));
 }
 
 TEST(LongArrayTests, LongArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(LongArrayTests, LongArraySortAscending) {
     TEST_ASSERT_EQUAL(4L, x);
 
     LongArrayAt(&longArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+}
+
+TEST(LongArrayTests, LongArraySortDescending) {
+    LongArrayPush(&longArray, 3L);
+
+    LongArrayPush(&longArray, 2L);
+
+    LongArrayPush(&longArray, 4L);
+
+    LongArrayPush(&longArray, 5L);
+
+    LongArrayPush(&longArray, 1L);
+
+    LongArraySort(&longArray, LongDescendingCompare);
+
+    long x;
+
+    LongArrayAt(&longArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+
+    LongArrayAt(&longArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    LongArrayAt(&longArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    LongArrayAt(&longArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    LongArrayAt(&longArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+}
+
+TEST(LongArrayTests, LongArrayOverlapEmptyArrays) {
+    int result = LongArrayOverlap(&longArray, &otherLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, LongArrayCount(&longArray));
+
+    TEST_ASSERT_EQUAL(0, LongArrayCount(&otherLongArray));
+}
+
+TEST(LongArrayTests, LongArrayOverlapNonEmptyArrayWithEmptyArray) {
+    LongArrayPush(&longArray, 1L);
+
+    LongArrayPush(&longArray, 2L);
+
+    LongArrayPush(&longArray, 3L);
+
+    LongArrayPush(&longArray, 4L);
+
+    LongArrayPush(&longArray, 5L);
+
+    int result = LongArrayOverlap(&longArray, &otherLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongArrayCount(&longArray));
+
+    TEST_ASSERT_EQUAL(0, LongArrayCount(&otherLongArray));
+
+    LongArraySort(&longArray, LongAscendingCompare);
+
+    long x;
+
+    LongArrayAt(&longArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    LongArrayAt(&longArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    LongArrayAt(&longArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    LongArrayAt(&longArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    LongArrayAt(&longArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+}
+
+TEST(LongArrayTests, LongArrayOverlapEmptyArrayWithNonEmptyArray) {
+    LongArrayPush(&otherLongArray, 1L);
+
+    LongArrayPush(&otherLongArray, 2L);
+
+    LongArrayPush(&otherLongArray, 3L);
+
+    LongArrayPush(&otherLongArray, 4L);
+
+    LongArrayPush(&otherLongArray, 5L);
+
+    int result = LongArrayOverlap(&longArray, &otherLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongArrayCount(&longArray));
+
+    TEST_ASSERT_EQUAL(5, LongArrayCount(&otherLongArray));
+
+    LongArraySort(&longArray, LongAscendingCompare);
+
+    long x;
+
+    LongArrayAt(&longArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    LongArrayAt(&longArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    LongArrayAt(&longArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    LongArrayAt(&longArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    LongArrayAt(&longArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+}
+
+TEST(LongArrayTests, LongArrayOverlapNonEmptyArrays) {
+    LongArrayPush(&longArray, 1L);
+
+    LongArrayPush(&longArray, 1L);
+
+    LongArrayPush(&longArray, 1L);
+
+    LongArrayPush(&longArray, 3L);
+
+    LongArrayPush(&longArray, 4L);
+
+    LongArrayPush(&longArray, 5L);
+
+    LongArrayPush(&longArray, 5L);
+
+    LongArrayPush(&otherLongArray, 1L);
+
+    LongArrayPush(&otherLongArray, 2L);
+
+    LongArrayPush(&otherLongArray, 3L);
+
+    LongArrayPush(&otherLongArray, 4L);
+
+    LongArrayPush(&otherLongArray, 4L);
+
+    LongArrayPush(&otherLongArray, 5L);
+
+    LongArrayPush(&otherLongArray, 5L);
+
+    LongArrayPush(&otherLongArray, 5L);
+
+    int result = LongArrayOverlap(&longArray, &otherLongArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, LongArrayCount(&longArray));
+
+    TEST_ASSERT_EQUAL(8, LongArrayCount(&otherLongArray));
+
+    LongArraySort(&longArray, LongAscendingCompare);
+
+    long x;
+
+    LongArrayAt(&longArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    LongArrayAt(&longArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    LongArrayAt(&longArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1L, x);
+
+    LongArrayAt(&longArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2L, x);
+
+    LongArrayAt(&longArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3L, x);
+
+    LongArrayAt(&longArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    LongArrayAt(&longArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4L, x);
+
+    LongArrayAt(&longArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+
+    LongArrayAt(&longArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5L, x);
+
+    LongArrayAt(&longArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5L, x);
 }

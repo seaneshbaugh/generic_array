@@ -554,11 +554,11 @@ int UnsignedIntAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int UnsignedIntDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArraySortEmptyArray) {
+    UnsignedIntArraySort(&unsignedIntArray, UnsignedIntAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, UnsignedIntArrayCount(&unsignedIntArray));
 }
 
 TEST(UnsignedIntArrayTests, UnsignedIntArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(UnsignedIntArrayTests, UnsignedIntArraySortAscending) {
     TEST_ASSERT_EQUAL(4U, x);
 
     UnsignedIntArrayAt(&unsignedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArraySortDescending) {
+    UnsignedIntArrayPush(&unsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 2U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 5U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArraySort(&unsignedIntArray, UnsignedIntDescendingCompare);
+
+    unsigned int x;
+
+    UnsignedIntArrayAt(&unsignedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayOverlapEmptyArrays) {
+    int result = UnsignedIntArrayOverlap(&unsignedIntArray, &otherUnsignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, UnsignedIntArrayCount(&unsignedIntArray));
+
+    TEST_ASSERT_EQUAL(0, UnsignedIntArrayCount(&otherUnsignedIntArray));
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayOverlapNonEmptyArrayWithEmptyArray) {
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 2U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 5U);
+
+    int result = UnsignedIntArrayOverlap(&unsignedIntArray, &otherUnsignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, UnsignedIntArrayCount(&unsignedIntArray));
+
+    TEST_ASSERT_EQUAL(0, UnsignedIntArrayCount(&otherUnsignedIntArray));
+
+    UnsignedIntArraySort(&unsignedIntArray, UnsignedIntAscendingCompare);
+
+    unsigned int x;
+
+    UnsignedIntArrayAt(&unsignedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayOverlapEmptyArrayWithNonEmptyArray) {
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 2U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 5U);
+
+    int result = UnsignedIntArrayOverlap(&unsignedIntArray, &otherUnsignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, UnsignedIntArrayCount(&unsignedIntArray));
+
+    TEST_ASSERT_EQUAL(5, UnsignedIntArrayCount(&otherUnsignedIntArray));
+
+    UnsignedIntArraySort(&unsignedIntArray, UnsignedIntAscendingCompare);
+
+    unsigned int x;
+
+    UnsignedIntArrayAt(&unsignedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}
+
+TEST(UnsignedIntArrayTests, UnsignedIntArrayOverlapNonEmptyArrays) {
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 5U);
+
+    UnsignedIntArrayPush(&unsignedIntArray, 5U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 1U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 2U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 3U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 4U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 5U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 5U);
+
+    UnsignedIntArrayPush(&otherUnsignedIntArray, 5U);
+
+    int result = UnsignedIntArrayOverlap(&unsignedIntArray, &otherUnsignedIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, UnsignedIntArrayCount(&unsignedIntArray));
+
+    TEST_ASSERT_EQUAL(8, UnsignedIntArrayCount(&otherUnsignedIntArray));
+
+    UnsignedIntArraySort(&unsignedIntArray, UnsignedIntAscendingCompare);
+
+    unsigned int x;
+
+    UnsignedIntArrayAt(&unsignedIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5U, x);
+
+    UnsignedIntArrayAt(&unsignedIntArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5U, x);
 }

@@ -554,11 +554,11 @@ int DoubleAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int DoubleDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(DoubleArrayTests, DoubleArraySortEmptyArray) {
+    DoubleArraySort(&doubleArray, DoubleAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, DoubleArrayCount(&doubleArray));
 }
 
 TEST(DoubleArrayTests, DoubleArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(DoubleArrayTests, DoubleArraySortAscending) {
     TEST_ASSERT_EQUAL(4.0, x);
 
     DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+}
+
+TEST(DoubleArrayTests, DoubleArraySortDescending) {
+    DoubleArrayPush(&doubleArray, 3.0);
+
+    DoubleArrayPush(&doubleArray, 2.0);
+
+    DoubleArrayPush(&doubleArray, 4.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArraySort(&doubleArray, DoubleDescendingCompare);
+
+    double x;
+
+    DoubleArrayAt(&doubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+
+    DoubleArrayAt(&doubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    DoubleArrayAt(&doubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0, x);
+
+    DoubleArrayAt(&doubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0, x);
+
+    DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+}
+
+TEST(DoubleArrayTests, DoubleArrayOverlapEmptyArrays) {
+    int result = DoubleArrayOverlap(&doubleArray, &otherDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, DoubleArrayCount(&doubleArray));
+
+    TEST_ASSERT_EQUAL(0, DoubleArrayCount(&otherDoubleArray));
+}
+
+TEST(DoubleArrayTests, DoubleArrayOverlapNonEmptyArrayWithEmptyArray) {
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 2.0);
+
+    DoubleArrayPush(&doubleArray, 3.0);
+
+    DoubleArrayPush(&doubleArray, 4.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    int result = DoubleArrayOverlap(&doubleArray, &otherDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, DoubleArrayCount(&doubleArray));
+
+    TEST_ASSERT_EQUAL(0, DoubleArrayCount(&otherDoubleArray));
+
+    DoubleArraySort(&doubleArray, DoubleAscendingCompare);
+
+    double x;
+
+    DoubleArrayAt(&doubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    DoubleArrayAt(&doubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0, x);
+
+    DoubleArrayAt(&doubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0, x);
+
+    DoubleArrayAt(&doubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+}
+
+TEST(DoubleArrayTests, DoubleArrayOverlapEmptyArrayWithNonEmptyArray) {
+    DoubleArrayPush(&otherDoubleArray, 1.0);
+
+    DoubleArrayPush(&otherDoubleArray, 2.0);
+
+    DoubleArrayPush(&otherDoubleArray, 3.0);
+
+    DoubleArrayPush(&otherDoubleArray, 4.0);
+
+    DoubleArrayPush(&otherDoubleArray, 5.0);
+
+    int result = DoubleArrayOverlap(&doubleArray, &otherDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, DoubleArrayCount(&doubleArray));
+
+    TEST_ASSERT_EQUAL(5, DoubleArrayCount(&otherDoubleArray));
+
+    DoubleArraySort(&doubleArray, DoubleAscendingCompare);
+
+    double x;
+
+    DoubleArrayAt(&doubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    DoubleArrayAt(&doubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0, x);
+
+    DoubleArrayAt(&doubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0, x);
+
+    DoubleArrayAt(&doubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+}
+
+TEST(DoubleArrayTests, DoubleArrayOverlapNonEmptyArrays) {
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 1.0);
+
+    DoubleArrayPush(&doubleArray, 3.0);
+
+    DoubleArrayPush(&doubleArray, 4.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    DoubleArrayPush(&doubleArray, 5.0);
+
+    DoubleArrayPush(&otherDoubleArray, 1.0);
+
+    DoubleArrayPush(&otherDoubleArray, 2.0);
+
+    DoubleArrayPush(&otherDoubleArray, 3.0);
+
+    DoubleArrayPush(&otherDoubleArray, 4.0);
+
+    DoubleArrayPush(&otherDoubleArray, 4.0);
+
+    DoubleArrayPush(&otherDoubleArray, 5.0);
+
+    DoubleArrayPush(&otherDoubleArray, 5.0);
+
+    DoubleArrayPush(&otherDoubleArray, 5.0);
+
+    int result = DoubleArrayOverlap(&doubleArray, &otherDoubleArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, DoubleArrayCount(&doubleArray));
+
+    TEST_ASSERT_EQUAL(8, DoubleArrayCount(&otherDoubleArray));
+
+    DoubleArraySort(&doubleArray, DoubleAscendingCompare);
+
+    double x;
+
+    DoubleArrayAt(&doubleArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    DoubleArrayAt(&doubleArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    DoubleArrayAt(&doubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1.0, x);
+
+    DoubleArrayAt(&doubleArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0, x);
+
+    DoubleArrayAt(&doubleArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3.0, x);
+
+    DoubleArrayAt(&doubleArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    DoubleArrayAt(&doubleArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4.0, x);
+
+    DoubleArrayAt(&doubleArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+
+    DoubleArrayAt(&doubleArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5.0, x);
+
+    DoubleArrayAt(&doubleArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5.0, x);
 }

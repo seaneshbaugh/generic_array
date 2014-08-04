@@ -554,11 +554,11 @@ int StringAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int StringDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(StringArrayTests, StringArraySortEmptyArray) {
+    StringArraySort(&stringArray, StringAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, StringArrayCount(&stringArray));
 }
 
 TEST(StringArrayTests, StringArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(StringArrayTests, StringArraySortAscending) {
     TEST_ASSERT_EQUAL_STRING("test 4", x);
 
     StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+}
+
+TEST(StringArrayTests, StringArraySortDescending) {
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArraySort(&stringArray, StringDescendingCompare);
+
+    char* x;
+
+    StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+
+    StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 3", x);
+
+    StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 2", x);
+
+    StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+}
+
+TEST(StringArrayTests, StringArrayOverlapEmptyArrays) {
+    int result = StringArrayOverlap(&stringArray, &otherStringArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, StringArrayCount(&stringArray));
+
+    TEST_ASSERT_EQUAL(0, StringArrayCount(&otherStringArray));
+}
+
+TEST(StringArrayTests, StringArrayOverlapNonEmptyArrayWithEmptyArray) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    int result = StringArrayOverlap(&stringArray, &otherStringArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, StringArrayCount(&stringArray));
+
+    TEST_ASSERT_EQUAL(0, StringArrayCount(&otherStringArray));
+
+    StringArraySort(&stringArray, StringAscendingCompare);
+
+    char* x;
+
+    StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 2", x);
+
+    StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 3", x);
+
+    StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+}
+
+TEST(StringArrayTests, StringArrayOverlapEmptyArrayWithNonEmptyArray) {
+    StringArrayPush(&otherStringArray, "test 1");
+
+    StringArrayPush(&otherStringArray, "test 2");
+
+    StringArrayPush(&otherStringArray, "test 3");
+
+    StringArrayPush(&otherStringArray, "test 4");
+
+    StringArrayPush(&otherStringArray, "test 5");
+
+    int result = StringArrayOverlap(&stringArray, &otherStringArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, StringArrayCount(&stringArray));
+
+    TEST_ASSERT_EQUAL(5, StringArrayCount(&otherStringArray));
+
+    StringArraySort(&stringArray, StringAscendingCompare);
+
+    char* x;
+
+    StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 2", x);
+
+    StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 3", x);
+
+    StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+}
+
+TEST(StringArrayTests, StringArrayOverlapNonEmptyArrays) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    StringArrayPush(&stringArray, "test 5");
+
+    StringArrayPush(&otherStringArray, "test 1");
+
+    StringArrayPush(&otherStringArray, "test 2");
+
+    StringArrayPush(&otherStringArray, "test 3");
+
+    StringArrayPush(&otherStringArray, "test 4");
+
+    StringArrayPush(&otherStringArray, "test 4");
+
+    StringArrayPush(&otherStringArray, "test 5");
+
+    StringArrayPush(&otherStringArray, "test 5");
+
+    StringArrayPush(&otherStringArray, "test 5");
+
+    int result = StringArrayOverlap(&stringArray, &otherStringArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, StringArrayCount(&stringArray));
+
+    TEST_ASSERT_EQUAL(8, StringArrayCount(&otherStringArray));
+
+    StringArraySort(&stringArray, StringAscendingCompare);
+
+    char* x;
+
+    StringArrayAt(&stringArray, 0, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 1, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 1", x);
+
+    StringArrayAt(&stringArray, 3, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 2", x);
+
+    StringArrayAt(&stringArray, 4, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 3", x);
+
+    StringArrayAt(&stringArray, 5, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 6, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 4", x);
+
+    StringArrayAt(&stringArray, 7, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+
+    StringArrayAt(&stringArray, 8, &x);
+
+    TEST_ASSERT_EQUAL_STRING("test 5", x);
+
+    StringArrayAt(&stringArray, 9, &x);
 
     TEST_ASSERT_EQUAL_STRING("test 5", x);
 }

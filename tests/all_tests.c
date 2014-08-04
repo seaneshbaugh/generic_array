@@ -34,6 +34,11 @@ TEST_GROUP_RUNNER(CharArrayTests) {
     RUN_TEST_CASE(CharArrayTests, CharArrayPush);
     RUN_TEST_CASE(CharArrayTests, CharArrayMultipleElementArrayToString);
     RUN_TEST_CASE(CharArrayTests, CharArraySortAscending);
+    RUN_TEST_CASE(CharArrayTests, CharArraySortDescending);
+    RUN_TEST_CASE(CharArrayTests, CharArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(CharArrayTests, CharArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(CharArrayTests, CharArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(CharArrayTests, CharArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(DoubleArrayTests) {
@@ -70,6 +75,11 @@ TEST_GROUP_RUNNER(DoubleArrayTests) {
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayPush);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayMultipleElementArrayToString);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArraySortAscending);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArraySortDescending);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(FloatArrayTests) {
@@ -106,6 +116,11 @@ TEST_GROUP_RUNNER(FloatArrayTests) {
     RUN_TEST_CASE(FloatArrayTests, FloatArrayPush);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayMultipleElementArrayToString);
     RUN_TEST_CASE(FloatArrayTests, FloatArraySortAscending);
+    RUN_TEST_CASE(FloatArrayTests, FloatArraySortDescending);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(IntArrayTests) {
@@ -142,6 +157,11 @@ TEST_GROUP_RUNNER(IntArrayTests) {
     RUN_TEST_CASE(IntArrayTests, IntArrayPush);
     RUN_TEST_CASE(IntArrayTests, IntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(IntArrayTests, IntArraySortAscending);
+    RUN_TEST_CASE(IntArrayTests, IntArraySortDescending);
+    RUN_TEST_CASE(IntArrayTests, IntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(IntArrayTests, IntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(IntArrayTests, IntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(IntArrayTests, IntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(LongArrayTests) {
@@ -178,6 +198,11 @@ TEST_GROUP_RUNNER(LongArrayTests) {
     RUN_TEST_CASE(LongArrayTests, LongArrayPush);
     RUN_TEST_CASE(LongArrayTests, LongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(LongArrayTests, LongArraySortAscending);
+    RUN_TEST_CASE(LongArrayTests, LongArraySortDescending);
+    RUN_TEST_CASE(LongArrayTests, LongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(LongArrayTests, LongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(LongArrayTests, LongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(LongArrayTests, LongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(LongDoubleArrayTests) {
@@ -214,6 +239,11 @@ TEST_GROUP_RUNNER(LongDoubleArrayTests) {
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayPush);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySortAscending);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySortDescending);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(LongIntArrayTests) {
@@ -250,6 +280,11 @@ TEST_GROUP_RUNNER(LongIntArrayTests) {
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayPush);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArraySortAscending);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArraySortDescending);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(LongLongArrayTests) {
@@ -286,6 +321,11 @@ TEST_GROUP_RUNNER(LongLongArrayTests) {
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayPush);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArraySortAscending);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArraySortDescending);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(LongLongIntArrayTests) {
@@ -322,6 +362,11 @@ TEST_GROUP_RUNNER(LongLongIntArrayTests) {
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayPush);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySortAscending);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySortDescending);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(ShortArrayTests) {
@@ -358,6 +403,11 @@ TEST_GROUP_RUNNER(ShortArrayTests) {
     RUN_TEST_CASE(ShortArrayTests, ShortArrayPush);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayMultipleElementArrayToString);
     RUN_TEST_CASE(ShortArrayTests, ShortArraySortAscending);
+    RUN_TEST_CASE(ShortArrayTests, ShortArraySortDescending);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(ShortIntArrayTests) {
@@ -394,6 +444,11 @@ TEST_GROUP_RUNNER(ShortIntArrayTests) {
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayPush);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySortAscending);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySortDescending);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedCharArrayTests) {
@@ -430,6 +485,11 @@ TEST_GROUP_RUNNER(SignedCharArrayTests) {
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayPush);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySortAscending);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySortDescending);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedIntArrayTests) {
@@ -466,6 +526,11 @@ TEST_GROUP_RUNNER(SignedIntArrayTests) {
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayPush);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySortAscending);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySortDescending);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedLongArrayTests) {
@@ -502,6 +567,11 @@ TEST_GROUP_RUNNER(SignedLongArrayTests) {
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayPush);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySortAscending);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySortDescending);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
@@ -538,6 +608,11 @@ TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayPush);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySortAscending);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySortDescending);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
@@ -574,6 +649,11 @@ TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayPush);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySortAscending);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySortDescending);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
@@ -610,6 +690,11 @@ TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayPush);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySortAscending);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySortDescending);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedShortArrayTests) {
@@ -646,6 +731,11 @@ TEST_GROUP_RUNNER(SignedShortArrayTests) {
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayPush);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySortAscending);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySortDescending);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
@@ -682,6 +772,11 @@ TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayPush);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySortAscending);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySortDescending);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(StringArrayTests) {
@@ -718,6 +813,11 @@ TEST_GROUP_RUNNER(StringArrayTests) {
     RUN_TEST_CASE(StringArrayTests, StringArrayPush);
     RUN_TEST_CASE(StringArrayTests, StringArrayMultipleElementArrayToString);
     RUN_TEST_CASE(StringArrayTests, StringArraySortAscending);
+    RUN_TEST_CASE(StringArrayTests, StringArraySortDescending);
+    RUN_TEST_CASE(StringArrayTests, StringArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(StringArrayTests, StringArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(StringArrayTests, StringArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(StringArrayTests, StringArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedArrayTests) {
@@ -754,6 +854,11 @@ TEST_GROUP_RUNNER(UnsignedArrayTests) {
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayPush);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySortAscending);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySortDescending);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
@@ -790,6 +895,11 @@ TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayPush);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySortAscending);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySortDescending);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
@@ -826,6 +936,11 @@ TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayPush);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySortAscending);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySortDescending);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
@@ -862,6 +977,11 @@ TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayPush);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySortAscending);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySortDescending);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
@@ -898,6 +1018,11 @@ TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySortAscending);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySortDescending);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
@@ -934,6 +1059,11 @@ TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayPush);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySortAscending);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySortDescending);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
@@ -970,6 +1100,11 @@ TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortAscending);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortDescending);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
@@ -1006,6 +1141,11 @@ TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayPush);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySortAscending);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySortDescending);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayOverlapNonEmptyArrays);
 }
 
 TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
@@ -1042,6 +1182,11 @@ TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayPush);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayMultipleElementArrayToString);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySortAscending);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySortDescending);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayOverlapEmptyArrays);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayOverlapNonEmptyArrayWithEmptyArray);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayOverlapEmptyArrayWithNonEmptyArray);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayOverlapNonEmptyArrays);
 }
 
 static void RunAllTests(void) {

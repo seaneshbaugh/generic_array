@@ -5,12 +5,18 @@ Bundler.require(:default)
 class TestDataType
   attr_accessor :name, :name_camelized, :name_lower_camelized, :name_for_casting, :assert_function, :test_values, :loop_value, :as_string
 
-  def initialize(name, test_values, loop_value, as_string_values, name_for_casting_override = nil, assert_function = nil)
+  def initialize(name, test_values, loop_value, as_string_values, name_for_casting_override = nil, assert_function_override = nil)
     self.name = name
 
     self.name_camelized = name.camelize
 
     self.name_lower_camelized = name.camelize(:lower)
+
+    self.test_values = test_values
+
+    self.loop_value = loop_value
+
+    self.as_string = "[" + as_string_values.join(', ') +"]"
 
     if name_for_casting_override.present?
       self.name_for_casting = name_for_casting_override
@@ -18,17 +24,11 @@ class TestDataType
       self.name_for_casting = name.humanize.downcase
     end
 
-    if assert_function.present?
-      self.assert_function = assert_function
+    if assert_function_override.present?
+      self.assert_function = assert_function_override
     else
       self.assert_function = 'TEST_ASSERT_EQUAL'
     end
-
-    self.test_values = test_values
-
-    self.loop_value = loop_value
-
-    self.as_string = "[" + as_string_values.join(', ') +"]"
   end
 end
 
@@ -118,6 +118,11 @@ class Tests < Thor
       Push
       MultipleElementArrayToString
       SortAscending
+      SortDescending
+      OverlapEmptyArrays
+      OverlapNonEmptyArrayWithEmptyArray
+      OverlapEmptyArrayWithNonEmptyArray
+      OverlapNonEmptyArrays
     )
 
     template('templates/all_tests.c.erb', 'tests/all_tests.c', force: options[:force])

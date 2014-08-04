@@ -554,11 +554,11 @@ int ShortIntAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int ShortIntDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(ShortIntArrayTests, ShortIntArraySortEmptyArray) {
+    ShortIntArraySort(&shortIntArray, ShortIntAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, ShortIntArrayCount(&shortIntArray));
 }
 
 TEST(ShortIntArrayTests, ShortIntArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(ShortIntArrayTests, ShortIntArraySortAscending) {
     TEST_ASSERT_EQUAL(4, x);
 
     ShortIntArrayAt(&shortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(ShortIntArrayTests, ShortIntArraySortDescending) {
+    ShortIntArrayPush(&shortIntArray, 3);
+
+    ShortIntArrayPush(&shortIntArray, 2);
+
+    ShortIntArrayPush(&shortIntArray, 4);
+
+    ShortIntArrayPush(&shortIntArray, 5);
+
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArraySort(&shortIntArray, ShortIntDescendingCompare);
+
+    short int x;
+
+    ShortIntArrayAt(&shortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    ShortIntArrayAt(&shortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    ShortIntArrayAt(&shortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    ShortIntArrayAt(&shortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    ShortIntArrayAt(&shortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+}
+
+TEST(ShortIntArrayTests, ShortIntArrayOverlapEmptyArrays) {
+    int result = ShortIntArrayOverlap(&shortIntArray, &otherShortIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, ShortIntArrayCount(&shortIntArray));
+
+    TEST_ASSERT_EQUAL(0, ShortIntArrayCount(&otherShortIntArray));
+}
+
+TEST(ShortIntArrayTests, ShortIntArrayOverlapNonEmptyArrayWithEmptyArray) {
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArrayPush(&shortIntArray, 2);
+
+    ShortIntArrayPush(&shortIntArray, 3);
+
+    ShortIntArrayPush(&shortIntArray, 4);
+
+    ShortIntArrayPush(&shortIntArray, 5);
+
+    int result = ShortIntArrayOverlap(&shortIntArray, &otherShortIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, ShortIntArrayCount(&shortIntArray));
+
+    TEST_ASSERT_EQUAL(0, ShortIntArrayCount(&otherShortIntArray));
+
+    ShortIntArraySort(&shortIntArray, ShortIntAscendingCompare);
+
+    short int x;
+
+    ShortIntArrayAt(&shortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    ShortIntArrayAt(&shortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    ShortIntArrayAt(&shortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    ShortIntArrayAt(&shortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    ShortIntArrayAt(&shortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(ShortIntArrayTests, ShortIntArrayOverlapEmptyArrayWithNonEmptyArray) {
+    ShortIntArrayPush(&otherShortIntArray, 1);
+
+    ShortIntArrayPush(&otherShortIntArray, 2);
+
+    ShortIntArrayPush(&otherShortIntArray, 3);
+
+    ShortIntArrayPush(&otherShortIntArray, 4);
+
+    ShortIntArrayPush(&otherShortIntArray, 5);
+
+    int result = ShortIntArrayOverlap(&shortIntArray, &otherShortIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, ShortIntArrayCount(&shortIntArray));
+
+    TEST_ASSERT_EQUAL(5, ShortIntArrayCount(&otherShortIntArray));
+
+    ShortIntArraySort(&shortIntArray, ShortIntAscendingCompare);
+
+    short int x;
+
+    ShortIntArrayAt(&shortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    ShortIntArrayAt(&shortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    ShortIntArrayAt(&shortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    ShortIntArrayAt(&shortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    ShortIntArrayAt(&shortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(ShortIntArrayTests, ShortIntArrayOverlapNonEmptyArrays) {
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArrayPush(&shortIntArray, 1);
+
+    ShortIntArrayPush(&shortIntArray, 3);
+
+    ShortIntArrayPush(&shortIntArray, 4);
+
+    ShortIntArrayPush(&shortIntArray, 5);
+
+    ShortIntArrayPush(&shortIntArray, 5);
+
+    ShortIntArrayPush(&otherShortIntArray, 1);
+
+    ShortIntArrayPush(&otherShortIntArray, 2);
+
+    ShortIntArrayPush(&otherShortIntArray, 3);
+
+    ShortIntArrayPush(&otherShortIntArray, 4);
+
+    ShortIntArrayPush(&otherShortIntArray, 4);
+
+    ShortIntArrayPush(&otherShortIntArray, 5);
+
+    ShortIntArrayPush(&otherShortIntArray, 5);
+
+    ShortIntArrayPush(&otherShortIntArray, 5);
+
+    int result = ShortIntArrayOverlap(&shortIntArray, &otherShortIntArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, ShortIntArrayCount(&shortIntArray));
+
+    TEST_ASSERT_EQUAL(8, ShortIntArrayCount(&otherShortIntArray));
+
+    ShortIntArraySort(&shortIntArray, ShortIntAscendingCompare);
+
+    short int x;
+
+    ShortIntArrayAt(&shortIntArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    ShortIntArrayAt(&shortIntArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    ShortIntArrayAt(&shortIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1, x);
+
+    ShortIntArrayAt(&shortIntArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2, x);
+
+    ShortIntArrayAt(&shortIntArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3, x);
+
+    ShortIntArrayAt(&shortIntArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    ShortIntArrayAt(&shortIntArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4, x);
+
+    ShortIntArrayAt(&shortIntArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    ShortIntArrayAt(&shortIntArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5, x);
+
+    ShortIntArrayAt(&shortIntArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5, x);
 }

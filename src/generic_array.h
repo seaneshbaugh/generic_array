@@ -148,8 +148,42 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Drop, __GENERIC_ARRAY_NAME__ *array, 
     return GA_SUCCESS;
 }
 
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Find, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ value, ssize_t *result) {
+    for (ssize_t i = 0; i < array->length; i++) {
+        if (GENERIC_ARRAY_VALUES_EQUAL(array->values[i], value)) {
+            *result = i;
+
+            return GA_SUCCESS;
+        }
+    }
+
+    *result = -1;
+
+    return GA_SUCCESS;
+}
+
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, IsEmpty, __GENERIC_ARRAY_NAME__ *array) {
     return array->length == 0;
+}
+
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Overlap, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_NAME__ *otherArray) {
+    for (ssize_t i = 0; i < otherArray->length; i++) {
+        ssize_t index;
+
+        int result = CALL_FUNCTION(__GENERIC_ARRAY_NAME__, Find, array, otherArray->values[i], &index);
+
+        if (result != GA_SUCCESS) {
+            return result;
+        }
+
+        if (index != -1) {
+            CALL_FUNCTION(__GENERIC_ARRAY_NAME__, DeleteAt, array, index);
+        }
+    }
+
+    CALL_FUNCTION(__GENERIC_ARRAY_NAME__, Concat, array, otherArray);
+
+    return GA_SUCCESS;
 }
 
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Push, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ value) {

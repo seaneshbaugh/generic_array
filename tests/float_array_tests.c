@@ -554,11 +554,11 @@ int FloatAscendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
@@ -569,14 +569,20 @@ int FloatDescendingCompare(const void *a, const void *b) {
     __GENERIC_ARRAY_TYPE__ s = *((__GENERIC_ARRAY_TYPE__*)b);
 
     if (GENERIC_ARRAY_VALUES_LESS_THAN(f, s)) {
-      return  1;
+        return 1;
     }
 
     if (GENERIC_ARRAY_VALUES_GREATER_THAN(f, s)) {
-      return -1;
+        return -1;
     }
 
     return 0;
+}
+
+TEST(FloatArrayTests, FloatArraySortEmptyArray) {
+    FloatArraySort(&floatArray, FloatAscendingCompare);
+
+    TEST_ASSERT_EQUAL(0, FloatArrayCount(&floatArray));
 }
 
 TEST(FloatArrayTests, FloatArraySortAscending) {
@@ -611,6 +617,224 @@ TEST(FloatArrayTests, FloatArraySortAscending) {
     TEST_ASSERT_EQUAL(4.0F, x);
 
     FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArraySortDescending) {
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArraySort(&floatArray, FloatDescendingCompare);
+
+    float x;
+
+    FloatArrayAt(&floatArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+
+    FloatArrayAt(&floatArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0F, x);
+
+    FloatArrayAt(&floatArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0F, x);
+
+    FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArrayOverlapEmptyArrays) {
+    int result = FloatArrayOverlap(&floatArray, &otherFloatArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, FloatArrayCount(&floatArray));
+
+    TEST_ASSERT_EQUAL(0, FloatArrayCount(&otherFloatArray));
+}
+
+TEST(FloatArrayTests, FloatArrayOverlapNonEmptyArrayWithEmptyArray) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    int result = FloatArrayOverlap(&floatArray, &otherFloatArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, FloatArrayCount(&floatArray));
+
+    TEST_ASSERT_EQUAL(0, FloatArrayCount(&otherFloatArray));
+
+    FloatArraySort(&floatArray, FloatAscendingCompare);
+
+    float x;
+
+    FloatArrayAt(&floatArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    FloatArrayAt(&floatArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0F, x);
+
+    FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0F, x);
+
+    FloatArrayAt(&floatArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArrayOverlapEmptyArrayWithNonEmptyArray) {
+    FloatArrayPush(&otherFloatArray, 1.0F);
+
+    FloatArrayPush(&otherFloatArray, 2.0F);
+
+    FloatArrayPush(&otherFloatArray, 3.0F);
+
+    FloatArrayPush(&otherFloatArray, 4.0F);
+
+    FloatArrayPush(&otherFloatArray, 5.0F);
+
+    int result = FloatArrayOverlap(&floatArray, &otherFloatArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, FloatArrayCount(&floatArray));
+
+    TEST_ASSERT_EQUAL(5, FloatArrayCount(&otherFloatArray));
+
+    FloatArraySort(&floatArray, FloatAscendingCompare);
+
+    float x;
+
+    FloatArrayAt(&floatArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    FloatArrayAt(&floatArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(2.0F, x);
+
+    FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(3.0F, x);
+
+    FloatArrayAt(&floatArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArrayOverlapNonEmptyArrays) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    FloatArrayPush(&floatArray, 5.0F);
+
+    FloatArrayPush(&otherFloatArray, 1.0F);
+
+    FloatArrayPush(&otherFloatArray, 2.0F);
+
+    FloatArrayPush(&otherFloatArray, 3.0F);
+
+    FloatArrayPush(&otherFloatArray, 4.0F);
+
+    FloatArrayPush(&otherFloatArray, 4.0F);
+
+    FloatArrayPush(&otherFloatArray, 5.0F);
+
+    FloatArrayPush(&otherFloatArray, 5.0F);
+
+    FloatArrayPush(&otherFloatArray, 5.0F);
+
+    int result = FloatArrayOverlap(&floatArray, &otherFloatArray);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(10, FloatArrayCount(&floatArray));
+
+    TEST_ASSERT_EQUAL(8, FloatArrayCount(&otherFloatArray));
+
+    FloatArraySort(&floatArray, FloatAscendingCompare);
+
+    float x;
+
+    FloatArrayAt(&floatArray, 0, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    FloatArrayAt(&floatArray, 1, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(1.0F, x);
+
+    FloatArrayAt(&floatArray, 3, &x);
+
+    TEST_ASSERT_EQUAL(2.0F, x);
+
+    FloatArrayAt(&floatArray, 4, &x);
+
+    TEST_ASSERT_EQUAL(3.0F, x);
+
+    FloatArrayAt(&floatArray, 5, &x);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    FloatArrayAt(&floatArray, 6, &x);
+
+    TEST_ASSERT_EQUAL(4.0F, x);
+
+    FloatArrayAt(&floatArray, 7, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+
+    FloatArrayAt(&floatArray, 8, &x);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+
+    FloatArrayAt(&floatArray, 9, &x);
 
     TEST_ASSERT_EQUAL(5.0F, x);
 }
