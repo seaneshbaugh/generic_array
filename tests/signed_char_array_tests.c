@@ -27,6 +27,26 @@ TEST(SignedCharArrayTests, SignedCharArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, signedCharArray.capacity);
 }
 
+TEST(SignedCharArrayTests, SignedCharArrayInitializeFromEmptyPointer) {
+    signed char values[] = { };
+
+    int result = SignedCharArrayInitializeFromPointer(&signedCharArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedCharArrayCount(&signedCharArray));
+}
+
+TEST(SignedCharArrayTests, SignedCharArrayInitializeFromPointer) {
+    signed char values[5] = { 'A', 'B', 'C', 'D', 'E' };
+
+    int result = SignedCharArrayInitializeFromPointer(&signedCharArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedCharArrayCount(&signedCharArray));
+}
+
 TEST(SignedCharArrayTests, SignedCharArrayPushOneElement) {
     int result = SignedCharArrayPush(&signedCharArray, 'A');
 
@@ -547,6 +567,84 @@ TEST(SignedCharArrayTests, SignedCharArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("['A', 'B', 'C', 'D', 'E']", asString);
 
     free(asString);
+}
+
+TEST(SignedCharArrayTests, SignedCharArraySetZeroLength) {
+    int result = SignedCharArraySet(&signedCharArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedCharArrayTests, SignedCharArraySetExistingElement) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    int result = SignedCharArraySet(&signedCharArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed char x;
+
+    result = SignedCharArrayAt(&signedCharArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(SignedCharArrayTests, SignedCharArraySetLessThanZeroIndex) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    int result = SignedCharArraySet(&signedCharArray, -2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed char x;
+
+    result = SignedCharArrayAt(&signedCharArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(SignedCharArrayTests, SignedCharArraySetGreaterThanLengthIndex) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    int result = SignedCharArraySet(&signedCharArray, 4, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedCharArrayTests, SignedCharArraySetLessThanNegativeLengthIndex) {
+    SignedCharArrayPush(&signedCharArray, 'A');
+
+    SignedCharArrayPush(&signedCharArray, 'B');
+
+    SignedCharArrayPush(&signedCharArray, 'C');
+
+    SignedCharArrayPush(&signedCharArray, 'D');
+
+    int result = SignedCharArraySet(&signedCharArray, -5, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int SignedCharAscendingCompare(const void *a, const void *b) {

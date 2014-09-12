@@ -27,6 +27,26 @@ TEST(SignedLongLongArrayTests, SignedLongLongArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, signedLongLongArray.capacity);
 }
 
+TEST(SignedLongLongArrayTests, SignedLongLongArrayInitializeFromEmptyPointer) {
+    signed long long values[] = { };
+
+    int result = SignedLongLongArrayInitializeFromPointer(&signedLongLongArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedLongLongArrayCount(&signedLongLongArray));
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArrayInitializeFromPointer) {
+    signed long long values[5] = { 1LL, 2LL, 3LL, 4LL, 5LL };
+
+    int result = SignedLongLongArrayInitializeFromPointer(&signedLongLongArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedLongLongArrayCount(&signedLongLongArray));
+}
+
 TEST(SignedLongLongArrayTests, SignedLongLongArrayPushOneElement) {
     int result = SignedLongLongArrayPush(&signedLongLongArray, 1LL);
 
@@ -547,6 +567,84 @@ TEST(SignedLongLongArrayTests, SignedLongLongArrayMultipleElementArrayToString) 
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySetZeroLength) {
+    int result = SignedLongLongArraySet(&signedLongLongArray, 2, 5LL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySetExistingElement) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    int result = SignedLongLongArraySet(&signedLongLongArray, 2, 5LL);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed long long x;
+
+    result = SignedLongLongArrayAt(&signedLongLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySetLessThanZeroIndex) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    int result = SignedLongLongArraySet(&signedLongLongArray, -2, 5LL);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed long long x;
+
+    result = SignedLongLongArrayAt(&signedLongLongArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5LL, x);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySetGreaterThanLengthIndex) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    int result = SignedLongLongArraySet(&signedLongLongArray, 4, 5LL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedLongLongArrayTests, SignedLongLongArraySetLessThanNegativeLengthIndex) {
+    SignedLongLongArrayPush(&signedLongLongArray, 1LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 2LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 3LL);
+
+    SignedLongLongArrayPush(&signedLongLongArray, 4LL);
+
+    int result = SignedLongLongArraySet(&signedLongLongArray, -5, 5LL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int SignedLongLongAscendingCompare(const void *a, const void *b) {

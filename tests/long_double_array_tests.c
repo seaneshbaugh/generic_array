@@ -27,6 +27,26 @@ TEST(LongDoubleArrayTests, LongDoubleArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, longDoubleArray.capacity);
 }
 
+TEST(LongDoubleArrayTests, LongDoubleArrayInitializeFromEmptyPointer) {
+    long double values[] = { };
+
+    int result = LongDoubleArrayInitializeFromPointer(&longDoubleArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, LongDoubleArrayCount(&longDoubleArray));
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArrayInitializeFromPointer) {
+    long double values[5] = { 1.0L, 2.0L, 3.0L, 4.0L, 5.0L };
+
+    int result = LongDoubleArrayInitializeFromPointer(&longDoubleArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongDoubleArrayCount(&longDoubleArray));
+}
+
 TEST(LongDoubleArrayTests, LongDoubleArrayPushOneElement) {
     int result = LongDoubleArrayPush(&longDoubleArray, 1.0L);
 
@@ -547,6 +567,84 @@ TEST(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1.000000, 2.000000, 3.000000, 4.000000, 5.000000]", asString);
 
     free(asString);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySetZeroLength) {
+    int result = LongDoubleArraySet(&longDoubleArray, 2, 5.0L);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySetExistingElement) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    int result = LongDoubleArraySet(&longDoubleArray, 2, 5.0L);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    long double x;
+
+    result = LongDoubleArrayAt(&longDoubleArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySetLessThanZeroIndex) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    int result = LongDoubleArraySet(&longDoubleArray, -2, 5.0L);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    long double x;
+
+    result = LongDoubleArrayAt(&longDoubleArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0L, x);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySetGreaterThanLengthIndex) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    int result = LongDoubleArraySet(&longDoubleArray, 4, 5.0L);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(LongDoubleArrayTests, LongDoubleArraySetLessThanNegativeLengthIndex) {
+    LongDoubleArrayPush(&longDoubleArray, 1.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 2.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 3.0L);
+
+    LongDoubleArrayPush(&longDoubleArray, 4.0L);
+
+    int result = LongDoubleArraySet(&longDoubleArray, -5, 5.0L);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int LongDoubleAscendingCompare(const void *a, const void *b) {

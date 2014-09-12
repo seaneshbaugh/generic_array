@@ -27,6 +27,26 @@ TEST(IntArrayTests, IntArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, intArray.capacity);
 }
 
+TEST(IntArrayTests, IntArrayInitializeFromEmptyPointer) {
+    int values[] = { };
+
+    int result = IntArrayInitializeFromPointer(&intArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, IntArrayCount(&intArray));
+}
+
+TEST(IntArrayTests, IntArrayInitializeFromPointer) {
+    int values[5] = { 1, 2, 3, 4, 5 };
+
+    int result = IntArrayInitializeFromPointer(&intArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, IntArrayCount(&intArray));
+}
+
 TEST(IntArrayTests, IntArrayPushOneElement) {
     int result = IntArrayPush(&intArray, 1);
 
@@ -547,6 +567,84 @@ TEST(IntArrayTests, IntArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(IntArrayTests, IntArraySetZeroLength) {
+    int result = IntArraySet(&intArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(IntArrayTests, IntArraySetExistingElement) {
+    IntArrayPush(&intArray, 1);
+
+    IntArrayPush(&intArray, 2);
+
+    IntArrayPush(&intArray, 3);
+
+    IntArrayPush(&intArray, 4);
+
+    int result = IntArraySet(&intArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    int x;
+
+    result = IntArrayAt(&intArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(IntArrayTests, IntArraySetLessThanZeroIndex) {
+    IntArrayPush(&intArray, 1);
+
+    IntArrayPush(&intArray, 2);
+
+    IntArrayPush(&intArray, 3);
+
+    IntArrayPush(&intArray, 4);
+
+    int result = IntArraySet(&intArray, -2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    int x;
+
+    result = IntArrayAt(&intArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(IntArrayTests, IntArraySetGreaterThanLengthIndex) {
+    IntArrayPush(&intArray, 1);
+
+    IntArrayPush(&intArray, 2);
+
+    IntArrayPush(&intArray, 3);
+
+    IntArrayPush(&intArray, 4);
+
+    int result = IntArraySet(&intArray, 4, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(IntArrayTests, IntArraySetLessThanNegativeLengthIndex) {
+    IntArrayPush(&intArray, 1);
+
+    IntArrayPush(&intArray, 2);
+
+    IntArrayPush(&intArray, 3);
+
+    IntArrayPush(&intArray, 4);
+
+    int result = IntArraySet(&intArray, -5, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int IntAscendingCompare(const void *a, const void *b) {

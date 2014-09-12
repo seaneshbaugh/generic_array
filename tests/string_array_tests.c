@@ -27,6 +27,26 @@ TEST(StringArrayTests, StringArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, stringArray.capacity);
 }
 
+TEST(StringArrayTests, StringArrayInitializeFromEmptyPointer) {
+    char* values[] = { };
+
+    int result = StringArrayInitializeFromPointer(&stringArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, StringArrayCount(&stringArray));
+}
+
+TEST(StringArrayTests, StringArrayInitializeFromPointer) {
+    char* values[5] = { "test 1", "test 2", "test 3", "test 4", "test 5" };
+
+    int result = StringArrayInitializeFromPointer(&stringArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, StringArrayCount(&stringArray));
+}
+
 TEST(StringArrayTests, StringArrayPushOneElement) {
     int result = StringArrayPush(&stringArray, "test 1");
 
@@ -547,6 +567,84 @@ TEST(StringArrayTests, StringArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[\"test 1\", \"test 2\", \"test 3\", \"test 4\", \"test 5\"]", asString);
 
     free(asString);
+}
+
+TEST(StringArrayTests, StringArraySetZeroLength) {
+    int result = StringArraySet(&stringArray, 2, "test 5");
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(StringArrayTests, StringArraySetExistingElement) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    int result = StringArraySet(&stringArray, 2, "test 5");
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    char* x;
+
+    result = StringArrayAt(&stringArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 5", x);
+}
+
+TEST(StringArrayTests, StringArraySetLessThanZeroIndex) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    int result = StringArraySet(&stringArray, -2, "test 5");
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    char* x;
+
+    result = StringArrayAt(&stringArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL("test 5", x);
+}
+
+TEST(StringArrayTests, StringArraySetGreaterThanLengthIndex) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    int result = StringArraySet(&stringArray, 4, "test 5");
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(StringArrayTests, StringArraySetLessThanNegativeLengthIndex) {
+    StringArrayPush(&stringArray, "test 1");
+
+    StringArrayPush(&stringArray, "test 2");
+
+    StringArrayPush(&stringArray, "test 3");
+
+    StringArrayPush(&stringArray, "test 4");
+
+    int result = StringArraySet(&stringArray, -5, "test 5");
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int StringAscendingCompare(const void *a, const void *b) {

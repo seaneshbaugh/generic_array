@@ -27,6 +27,26 @@ TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayInit
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, <%= @type.name_lower_camelized %>Array.capacity);
 }
 
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayInitializeFromEmptyPointer) {
+    <%= @type.name_for_casting %> values[] = { };
+
+    int result = <%= @type.name_camelized %>ArrayInitializeFromPointer(&<%= @type.name_lower_camelized %>Array, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, <%= @type.name_camelized %>ArrayCount(&<%= @type.name_lower_camelized %>Array));
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayInitializeFromPointer) {
+    <%= @type.name_for_casting %> values[5] = { <%= @type.test_values[0] %>, <%= @type.test_values[1] %>, <%= @type.test_values[2] %>, <%= @type.test_values[3] %>, <%= @type.test_values[4] %> };
+
+    int result = <%= @type.name_camelized %>ArrayInitializeFromPointer(&<%= @type.name_lower_camelized %>Array, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, <%= @type.name_camelized %>ArrayCount(&<%= @type.name_lower_camelized %>Array));
+}
+
 TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayPushOneElement) {
     int result = <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
 
@@ -547,6 +567,84 @@ TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArrayMult
     TEST_ASSERT_EQUAL_STRING("<%= @type.as_string %>", asString);
 
     free(asString);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySetZeroLength) {
+    int result = <%= @type.name_camelized %>ArraySet(&<%= @type.name_lower_camelized %>Array, 2, <%= @type.test_values[4] %>);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySetExistingElement) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    int result = <%= @type.name_camelized %>ArraySet(&<%= @type.name_lower_camelized %>Array, 2, <%= @type.test_values[4] %>);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    <%= @type.name_for_casting %> x;
+
+    result = <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(<%= @type.test_values[4] %>, x);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySetLessThanZeroIndex) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    int result = <%= @type.name_camelized %>ArraySet(&<%= @type.name_lower_camelized %>Array, -2, <%= @type.test_values[4] %>);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    <%= @type.name_for_casting %> x;
+
+    result = <%= @type.name_camelized %>ArrayAt(&<%= @type.name_lower_camelized %>Array, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(<%= @type.test_values[4] %>, x);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySetGreaterThanLengthIndex) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    int result = <%= @type.name_camelized %>ArraySet(&<%= @type.name_lower_camelized %>Array, 4, <%= @type.test_values[4] %>);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(<%= @type.name_camelized %>ArrayTests, <%= @type.name_camelized %>ArraySetLessThanNegativeLengthIndex) {
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[0] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[1] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[2] %>);
+
+    <%= @type.name_camelized %>ArrayPush(&<%= @type.name_lower_camelized %>Array, <%= @type.test_values[3] %>);
+
+    int result = <%= @type.name_camelized %>ArraySet(&<%= @type.name_lower_camelized %>Array, -5, <%= @type.test_values[4] %>);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int <%= @type.name_camelized %>AscendingCompare(const void *a, const void *b) {

@@ -27,6 +27,26 @@ TEST(UnsignedShortArrayTests, UnsignedShortArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, unsignedShortArray.capacity);
 }
 
+TEST(UnsignedShortArrayTests, UnsignedShortArrayInitializeFromEmptyPointer) {
+    unsigned short values[] = { };
+
+    int result = UnsignedShortArrayInitializeFromPointer(&unsignedShortArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, UnsignedShortArrayCount(&unsignedShortArray));
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArrayInitializeFromPointer) {
+    unsigned short values[5] = { 1U, 2U, 3U, 4U, 5U };
+
+    int result = UnsignedShortArrayInitializeFromPointer(&unsignedShortArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, UnsignedShortArrayCount(&unsignedShortArray));
+}
+
 TEST(UnsignedShortArrayTests, UnsignedShortArrayPushOneElement) {
     int result = UnsignedShortArrayPush(&unsignedShortArray, 1U);
 
@@ -547,6 +567,84 @@ TEST(UnsignedShortArrayTests, UnsignedShortArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArraySetZeroLength) {
+    int result = UnsignedShortArraySet(&unsignedShortArray, 2, 5U);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArraySetExistingElement) {
+    UnsignedShortArrayPush(&unsignedShortArray, 1U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 2U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 3U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 4U);
+
+    int result = UnsignedShortArraySet(&unsignedShortArray, 2, 5U);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned short x;
+
+    result = UnsignedShortArrayAt(&unsignedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArraySetLessThanZeroIndex) {
+    UnsignedShortArrayPush(&unsignedShortArray, 1U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 2U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 3U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 4U);
+
+    int result = UnsignedShortArraySet(&unsignedShortArray, -2, 5U);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned short x;
+
+    result = UnsignedShortArrayAt(&unsignedShortArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5U, x);
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArraySetGreaterThanLengthIndex) {
+    UnsignedShortArrayPush(&unsignedShortArray, 1U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 2U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 3U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 4U);
+
+    int result = UnsignedShortArraySet(&unsignedShortArray, 4, 5U);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedShortArrayTests, UnsignedShortArraySetLessThanNegativeLengthIndex) {
+    UnsignedShortArrayPush(&unsignedShortArray, 1U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 2U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 3U);
+
+    UnsignedShortArrayPush(&unsignedShortArray, 4U);
+
+    int result = UnsignedShortArraySet(&unsignedShortArray, -5, 5U);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int UnsignedShortAscendingCompare(const void *a, const void *b) {

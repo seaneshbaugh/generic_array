@@ -6,7 +6,23 @@ typedef struct {
     size_t length;
 } __GENERIC_ARRAY_NAME__;
 
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Initialize, __GENERIC_ARRAY_NAME__ *array);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, InitializeFromPointer, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ *values, size_t length);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Deinitialize, __GENERIC_ARRAY_NAME__ *array);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, At, __GENERIC_ARRAY_NAME__ *array, ssize_t index, __GENERIC_ARRAY_TYPE__ *result);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Clear, __GENERIC_ARRAY_NAME__ *array);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Concat, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_NAME__ *otherArray);
+MAKE_FUNCTION(size_t, __GENERIC_ARRAY_NAME__, Count, __GENERIC_ARRAY_NAME__ *array);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Delete, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ value);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, DeleteAt, __GENERIC_ARRAY_NAME__ *array, ssize_t index);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Drop, __GENERIC_ARRAY_NAME__ *array, size_t n);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Find, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ value, ssize_t *result);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, IsEmpty, __GENERIC_ARRAY_NAME__ *array);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Overlap, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_NAME__ *otherArray);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Set, __GENERIC_ARRAY_NAME__ *array, ssize_t index, __GENERIC_ARRAY_TYPE__ value);
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, ToString, __GENERIC_ARRAY_NAME__ *array, char **result);
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Push, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ value);
+MAKE_FUNCTION(void, __GENERIC_ARRAY_NAME__, Sort, __GENERIC_ARRAY_NAME__ *array, int (*comparisonFunction)(const void*, const void*));
 
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Initialize, __GENERIC_ARRAY_NAME__ *array) {
     array->values = calloc(GA_INITIAL_CAPACITY, sizeof(__GENERIC_ARRAY_TYPE__));
@@ -22,6 +38,24 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Initialize, __GENERIC_ARRAY_NAME__ *a
 
         return GA_ERROR_ALLOC_FAILED;
     }
+}
+
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, InitializeFromPointer, __GENERIC_ARRAY_NAME__ *array, __GENERIC_ARRAY_TYPE__ *values, size_t length) {
+    int result = CALL_FUNCTION(__GENERIC_ARRAY_NAME__, Initialize, array);
+
+    if (result != GA_SUCCESS) {
+        return result;
+    }
+
+    for (size_t i = 0; i < length; i++) {
+        result = CALL_FUNCTION(__GENERIC_ARRAY_NAME__, Push, array, values[i]);
+
+        if (result != GA_SUCCESS) {
+            return result;
+        }
+    }
+
+    return GA_SUCCESS;
 }
 
 MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Deinitialize, __GENERIC_ARRAY_NAME__ *array) {
@@ -200,6 +234,24 @@ MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Push, __GENERIC_ARRAY_NAME__ *array, 
     array->values[array->length] = value;
 
     array->length += 1;
+
+    return GA_SUCCESS;
+}
+
+MAKE_FUNCTION(int, __GENERIC_ARRAY_NAME__, Set, __GENERIC_ARRAY_NAME__ *array, ssize_t index, __GENERIC_ARRAY_TYPE__ value) {
+    if (array->length == 0) {
+        return GA_ERROR_INDEX_OUT_OF_BOUNDS;
+    }
+
+    if (index < 0) {
+        index += array->length;
+    }
+
+    if (index < 0 || index >= array->length) {
+        return GA_ERROR_INDEX_OUT_OF_BOUNDS;
+    }
+
+    array->values[index] = value;
 
     return GA_SUCCESS;
 }

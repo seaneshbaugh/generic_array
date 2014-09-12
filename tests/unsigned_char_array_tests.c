@@ -27,6 +27,26 @@ TEST(UnsignedCharArrayTests, UnsignedCharArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, unsignedCharArray.capacity);
 }
 
+TEST(UnsignedCharArrayTests, UnsignedCharArrayInitializeFromEmptyPointer) {
+    unsigned char values[] = { };
+
+    int result = UnsignedCharArrayInitializeFromPointer(&unsignedCharArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, UnsignedCharArrayCount(&unsignedCharArray));
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArrayInitializeFromPointer) {
+    unsigned char values[5] = { 'A', 'B', 'C', 'D', 'E' };
+
+    int result = UnsignedCharArrayInitializeFromPointer(&unsignedCharArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, UnsignedCharArrayCount(&unsignedCharArray));
+}
+
 TEST(UnsignedCharArrayTests, UnsignedCharArrayPushOneElement) {
     int result = UnsignedCharArrayPush(&unsignedCharArray, 'A');
 
@@ -547,6 +567,84 @@ TEST(UnsignedCharArrayTests, UnsignedCharArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("['A', 'B', 'C', 'D', 'E']", asString);
 
     free(asString);
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySetZeroLength) {
+    int result = UnsignedCharArraySet(&unsignedCharArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySetExistingElement) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    int result = UnsignedCharArraySet(&unsignedCharArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned char x;
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySetLessThanZeroIndex) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    int result = UnsignedCharArraySet(&unsignedCharArray, -2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned char x;
+
+    result = UnsignedCharArrayAt(&unsignedCharArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySetGreaterThanLengthIndex) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    int result = UnsignedCharArraySet(&unsignedCharArray, 4, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedCharArrayTests, UnsignedCharArraySetLessThanNegativeLengthIndex) {
+    UnsignedCharArrayPush(&unsignedCharArray, 'A');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'B');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'C');
+
+    UnsignedCharArrayPush(&unsignedCharArray, 'D');
+
+    int result = UnsignedCharArraySet(&unsignedCharArray, -5, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int UnsignedCharAscendingCompare(const void *a, const void *b) {

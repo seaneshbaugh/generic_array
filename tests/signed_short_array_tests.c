@@ -27,6 +27,26 @@ TEST(SignedShortArrayTests, SignedShortArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, signedShortArray.capacity);
 }
 
+TEST(SignedShortArrayTests, SignedShortArrayInitializeFromEmptyPointer) {
+    signed short values[] = { };
+
+    int result = SignedShortArrayInitializeFromPointer(&signedShortArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedShortArrayCount(&signedShortArray));
+}
+
+TEST(SignedShortArrayTests, SignedShortArrayInitializeFromPointer) {
+    signed short values[5] = { 1, 2, 3, 4, 5 };
+
+    int result = SignedShortArrayInitializeFromPointer(&signedShortArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedShortArrayCount(&signedShortArray));
+}
+
 TEST(SignedShortArrayTests, SignedShortArrayPushOneElement) {
     int result = SignedShortArrayPush(&signedShortArray, 1);
 
@@ -547,6 +567,84 @@ TEST(SignedShortArrayTests, SignedShortArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySetZeroLength) {
+    int result = SignedShortArraySet(&signedShortArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySetExistingElement) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    int result = SignedShortArraySet(&signedShortArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed short x;
+
+    result = SignedShortArrayAt(&signedShortArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySetLessThanZeroIndex) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    int result = SignedShortArraySet(&signedShortArray, -2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed short x;
+
+    result = SignedShortArrayAt(&signedShortArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySetGreaterThanLengthIndex) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    int result = SignedShortArraySet(&signedShortArray, 4, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedShortArrayTests, SignedShortArraySetLessThanNegativeLengthIndex) {
+    SignedShortArrayPush(&signedShortArray, 1);
+
+    SignedShortArrayPush(&signedShortArray, 2);
+
+    SignedShortArrayPush(&signedShortArray, 3);
+
+    SignedShortArrayPush(&signedShortArray, 4);
+
+    int result = SignedShortArraySet(&signedShortArray, -5, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int SignedShortAscendingCompare(const void *a, const void *b) {

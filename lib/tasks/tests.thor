@@ -87,6 +87,8 @@ class Tests < Thor
     @test_names = %w(
       InitialLength
       InitialCapacity
+      InitializeFromEmptyPointer
+      InitializeFromPointer
       PushOneElement
       PushCapacityPlusOneElements
       AtZeroLength
@@ -117,6 +119,10 @@ class Tests < Thor
       NonEmptyArrayIsNotEmpty
       Push
       MultipleElementArrayToString
+      SetZeroLength
+      SetExistingElement
+      SetLessThanZeroIndex
+      AtGreaterThanLengthIndex
       SortAscending
       SortDescending
       OverlapEmptyArrays

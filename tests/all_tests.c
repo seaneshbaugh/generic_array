@@ -3,6 +3,8 @@
 TEST_GROUP_RUNNER(CharArrayTests) {
     RUN_TEST_CASE(CharArrayTests, CharArrayInitialLength);
     RUN_TEST_CASE(CharArrayTests, CharArrayInitialCapacity);
+    RUN_TEST_CASE(CharArrayTests, CharArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(CharArrayTests, CharArrayInitializeFromPointer);
     RUN_TEST_CASE(CharArrayTests, CharArrayPushOneElement);
     RUN_TEST_CASE(CharArrayTests, CharArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(CharArrayTests, CharArrayAtZeroLength);
@@ -33,6 +35,10 @@ TEST_GROUP_RUNNER(CharArrayTests) {
     RUN_TEST_CASE(CharArrayTests, CharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(CharArrayTests, CharArrayPush);
     RUN_TEST_CASE(CharArrayTests, CharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(CharArrayTests, CharArraySetZeroLength);
+    RUN_TEST_CASE(CharArrayTests, CharArraySetExistingElement);
+    RUN_TEST_CASE(CharArrayTests, CharArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(CharArrayTests, CharArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(CharArrayTests, CharArraySortAscending);
     RUN_TEST_CASE(CharArrayTests, CharArraySortDescending);
     RUN_TEST_CASE(CharArrayTests, CharArrayOverlapEmptyArrays);
@@ -44,6 +50,8 @@ TEST_GROUP_RUNNER(CharArrayTests) {
 TEST_GROUP_RUNNER(DoubleArrayTests) {
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayInitialLength);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayInitialCapacity);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayInitializeFromPointer);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayPushOneElement);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayAtZeroLength);
@@ -74,6 +82,10 @@ TEST_GROUP_RUNNER(DoubleArrayTests) {
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayPush);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArraySetZeroLength);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArraySetExistingElement);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(DoubleArrayTests, DoubleArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArraySortAscending);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArraySortDescending);
     RUN_TEST_CASE(DoubleArrayTests, DoubleArrayOverlapEmptyArrays);
@@ -85,6 +97,8 @@ TEST_GROUP_RUNNER(DoubleArrayTests) {
 TEST_GROUP_RUNNER(FloatArrayTests) {
     RUN_TEST_CASE(FloatArrayTests, FloatArrayInitialLength);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayInitialCapacity);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayInitializeFromPointer);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayPushOneElement);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayAtZeroLength);
@@ -115,6 +129,10 @@ TEST_GROUP_RUNNER(FloatArrayTests) {
     RUN_TEST_CASE(FloatArrayTests, FloatArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayPush);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(FloatArrayTests, FloatArraySetZeroLength);
+    RUN_TEST_CASE(FloatArrayTests, FloatArraySetExistingElement);
+    RUN_TEST_CASE(FloatArrayTests, FloatArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(FloatArrayTests, FloatArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(FloatArrayTests, FloatArraySortAscending);
     RUN_TEST_CASE(FloatArrayTests, FloatArraySortDescending);
     RUN_TEST_CASE(FloatArrayTests, FloatArrayOverlapEmptyArrays);
@@ -126,6 +144,8 @@ TEST_GROUP_RUNNER(FloatArrayTests) {
 TEST_GROUP_RUNNER(IntArrayTests) {
     RUN_TEST_CASE(IntArrayTests, IntArrayInitialLength);
     RUN_TEST_CASE(IntArrayTests, IntArrayInitialCapacity);
+    RUN_TEST_CASE(IntArrayTests, IntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(IntArrayTests, IntArrayInitializeFromPointer);
     RUN_TEST_CASE(IntArrayTests, IntArrayPushOneElement);
     RUN_TEST_CASE(IntArrayTests, IntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(IntArrayTests, IntArrayAtZeroLength);
@@ -156,6 +176,10 @@ TEST_GROUP_RUNNER(IntArrayTests) {
     RUN_TEST_CASE(IntArrayTests, IntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(IntArrayTests, IntArrayPush);
     RUN_TEST_CASE(IntArrayTests, IntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(IntArrayTests, IntArraySetZeroLength);
+    RUN_TEST_CASE(IntArrayTests, IntArraySetExistingElement);
+    RUN_TEST_CASE(IntArrayTests, IntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(IntArrayTests, IntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(IntArrayTests, IntArraySortAscending);
     RUN_TEST_CASE(IntArrayTests, IntArraySortDescending);
     RUN_TEST_CASE(IntArrayTests, IntArrayOverlapEmptyArrays);
@@ -167,6 +191,8 @@ TEST_GROUP_RUNNER(IntArrayTests) {
 TEST_GROUP_RUNNER(LongArrayTests) {
     RUN_TEST_CASE(LongArrayTests, LongArrayInitialLength);
     RUN_TEST_CASE(LongArrayTests, LongArrayInitialCapacity);
+    RUN_TEST_CASE(LongArrayTests, LongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(LongArrayTests, LongArrayInitializeFromPointer);
     RUN_TEST_CASE(LongArrayTests, LongArrayPushOneElement);
     RUN_TEST_CASE(LongArrayTests, LongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(LongArrayTests, LongArrayAtZeroLength);
@@ -197,6 +223,10 @@ TEST_GROUP_RUNNER(LongArrayTests) {
     RUN_TEST_CASE(LongArrayTests, LongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongArrayTests, LongArrayPush);
     RUN_TEST_CASE(LongArrayTests, LongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongArrayTests, LongArraySetZeroLength);
+    RUN_TEST_CASE(LongArrayTests, LongArraySetExistingElement);
+    RUN_TEST_CASE(LongArrayTests, LongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(LongArrayTests, LongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(LongArrayTests, LongArraySortAscending);
     RUN_TEST_CASE(LongArrayTests, LongArraySortDescending);
     RUN_TEST_CASE(LongArrayTests, LongArrayOverlapEmptyArrays);
@@ -208,6 +238,8 @@ TEST_GROUP_RUNNER(LongArrayTests) {
 TEST_GROUP_RUNNER(LongDoubleArrayTests) {
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayInitialLength);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayInitialCapacity);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayInitializeFromPointer);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayPushOneElement);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayAtZeroLength);
@@ -238,6 +270,10 @@ TEST_GROUP_RUNNER(LongDoubleArrayTests) {
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayPush);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySetZeroLength);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySetExistingElement);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySortAscending);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArraySortDescending);
     RUN_TEST_CASE(LongDoubleArrayTests, LongDoubleArrayOverlapEmptyArrays);
@@ -249,6 +285,8 @@ TEST_GROUP_RUNNER(LongDoubleArrayTests) {
 TEST_GROUP_RUNNER(LongIntArrayTests) {
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayInitialLength);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayInitialCapacity);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayPushOneElement);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayAtZeroLength);
@@ -279,6 +317,10 @@ TEST_GROUP_RUNNER(LongIntArrayTests) {
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayPush);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArraySetZeroLength);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArraySetExistingElement);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(LongIntArrayTests, LongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArraySortAscending);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArraySortDescending);
     RUN_TEST_CASE(LongIntArrayTests, LongIntArrayOverlapEmptyArrays);
@@ -290,6 +332,8 @@ TEST_GROUP_RUNNER(LongIntArrayTests) {
 TEST_GROUP_RUNNER(LongLongArrayTests) {
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayInitialLength);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayInitialCapacity);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayInitializeFromPointer);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayPushOneElement);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayAtZeroLength);
@@ -320,6 +364,10 @@ TEST_GROUP_RUNNER(LongLongArrayTests) {
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayPush);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArraySetZeroLength);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArraySetExistingElement);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(LongLongArrayTests, LongLongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArraySortAscending);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArraySortDescending);
     RUN_TEST_CASE(LongLongArrayTests, LongLongArrayOverlapEmptyArrays);
@@ -331,6 +379,8 @@ TEST_GROUP_RUNNER(LongLongArrayTests) {
 TEST_GROUP_RUNNER(LongLongIntArrayTests) {
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayInitialLength);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayInitialCapacity);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayPushOneElement);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayAtZeroLength);
@@ -361,6 +411,10 @@ TEST_GROUP_RUNNER(LongLongIntArrayTests) {
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayPush);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySetZeroLength);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySetExistingElement);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySortAscending);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArraySortDescending);
     RUN_TEST_CASE(LongLongIntArrayTests, LongLongIntArrayOverlapEmptyArrays);
@@ -372,6 +426,8 @@ TEST_GROUP_RUNNER(LongLongIntArrayTests) {
 TEST_GROUP_RUNNER(ShortArrayTests) {
     RUN_TEST_CASE(ShortArrayTests, ShortArrayInitialLength);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayInitialCapacity);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayInitializeFromPointer);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayPushOneElement);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayAtZeroLength);
@@ -402,6 +458,10 @@ TEST_GROUP_RUNNER(ShortArrayTests) {
     RUN_TEST_CASE(ShortArrayTests, ShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayPush);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(ShortArrayTests, ShortArraySetZeroLength);
+    RUN_TEST_CASE(ShortArrayTests, ShortArraySetExistingElement);
+    RUN_TEST_CASE(ShortArrayTests, ShortArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(ShortArrayTests, ShortArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(ShortArrayTests, ShortArraySortAscending);
     RUN_TEST_CASE(ShortArrayTests, ShortArraySortDescending);
     RUN_TEST_CASE(ShortArrayTests, ShortArrayOverlapEmptyArrays);
@@ -413,6 +473,8 @@ TEST_GROUP_RUNNER(ShortArrayTests) {
 TEST_GROUP_RUNNER(ShortIntArrayTests) {
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayInitialLength);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayInitialCapacity);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayInitializeFromPointer);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayPushOneElement);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayAtZeroLength);
@@ -443,6 +505,10 @@ TEST_GROUP_RUNNER(ShortIntArrayTests) {
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayPush);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySetZeroLength);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySetExistingElement);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySortAscending);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArraySortDescending);
     RUN_TEST_CASE(ShortIntArrayTests, ShortIntArrayOverlapEmptyArrays);
@@ -454,6 +520,8 @@ TEST_GROUP_RUNNER(ShortIntArrayTests) {
 TEST_GROUP_RUNNER(SignedCharArrayTests) {
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayInitialLength);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayInitialCapacity);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayPushOneElement);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayAtZeroLength);
@@ -484,6 +552,10 @@ TEST_GROUP_RUNNER(SignedCharArrayTests) {
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayPush);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySetZeroLength);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySetExistingElement);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySortAscending);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArraySortDescending);
     RUN_TEST_CASE(SignedCharArrayTests, SignedCharArrayOverlapEmptyArrays);
@@ -495,6 +567,8 @@ TEST_GROUP_RUNNER(SignedCharArrayTests) {
 TEST_GROUP_RUNNER(SignedIntArrayTests) {
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayInitialLength);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayInitialCapacity);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayPushOneElement);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayAtZeroLength);
@@ -525,6 +599,10 @@ TEST_GROUP_RUNNER(SignedIntArrayTests) {
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayPush);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySetZeroLength);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySetExistingElement);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySortAscending);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArraySortDescending);
     RUN_TEST_CASE(SignedIntArrayTests, SignedIntArrayOverlapEmptyArrays);
@@ -536,6 +614,8 @@ TEST_GROUP_RUNNER(SignedIntArrayTests) {
 TEST_GROUP_RUNNER(SignedLongArrayTests) {
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayInitialLength);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayInitialCapacity);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayPushOneElement);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayAtZeroLength);
@@ -566,6 +646,10 @@ TEST_GROUP_RUNNER(SignedLongArrayTests) {
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayPush);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySetZeroLength);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySetExistingElement);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySortAscending);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArraySortDescending);
     RUN_TEST_CASE(SignedLongArrayTests, SignedLongArrayOverlapEmptyArrays);
@@ -577,6 +661,8 @@ TEST_GROUP_RUNNER(SignedLongArrayTests) {
 TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayInitialLength);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayInitialCapacity);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayPushOneElement);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayAtZeroLength);
@@ -607,6 +693,10 @@ TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayPush);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySetZeroLength);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySetExistingElement);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySortAscending);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArraySortDescending);
     RUN_TEST_CASE(SignedLongIntArrayTests, SignedLongIntArrayOverlapEmptyArrays);
@@ -618,6 +708,8 @@ TEST_GROUP_RUNNER(SignedLongIntArrayTests) {
 TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayInitialLength);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayInitialCapacity);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayPushOneElement);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayAtZeroLength);
@@ -648,6 +740,10 @@ TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayPush);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySetZeroLength);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySetExistingElement);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySortAscending);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArraySortDescending);
     RUN_TEST_CASE(SignedLongLongArrayTests, SignedLongLongArrayOverlapEmptyArrays);
@@ -659,6 +755,8 @@ TEST_GROUP_RUNNER(SignedLongLongArrayTests) {
 TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayInitialLength);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayInitialCapacity);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayPushOneElement);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayAtZeroLength);
@@ -689,6 +787,10 @@ TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayPush);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySetZeroLength);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySetExistingElement);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySortAscending);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArraySortDescending);
     RUN_TEST_CASE(SignedLongLongIntArrayTests, SignedLongLongIntArrayOverlapEmptyArrays);
@@ -700,6 +802,8 @@ TEST_GROUP_RUNNER(SignedLongLongIntArrayTests) {
 TEST_GROUP_RUNNER(SignedShortArrayTests) {
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayInitialLength);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayInitialCapacity);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayPushOneElement);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayAtZeroLength);
@@ -730,6 +834,10 @@ TEST_GROUP_RUNNER(SignedShortArrayTests) {
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayPush);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySetZeroLength);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySetExistingElement);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySortAscending);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArraySortDescending);
     RUN_TEST_CASE(SignedShortArrayTests, SignedShortArrayOverlapEmptyArrays);
@@ -741,6 +849,8 @@ TEST_GROUP_RUNNER(SignedShortArrayTests) {
 TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayInitialLength);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayInitialCapacity);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayInitializeFromPointer);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayPushOneElement);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayAtZeroLength);
@@ -771,6 +881,10 @@ TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayPush);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySetZeroLength);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySetExistingElement);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySortAscending);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArraySortDescending);
     RUN_TEST_CASE(SignedShortIntArrayTests, SignedShortIntArrayOverlapEmptyArrays);
@@ -782,6 +896,8 @@ TEST_GROUP_RUNNER(SignedShortIntArrayTests) {
 TEST_GROUP_RUNNER(StringArrayTests) {
     RUN_TEST_CASE(StringArrayTests, StringArrayInitialLength);
     RUN_TEST_CASE(StringArrayTests, StringArrayInitialCapacity);
+    RUN_TEST_CASE(StringArrayTests, StringArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(StringArrayTests, StringArrayInitializeFromPointer);
     RUN_TEST_CASE(StringArrayTests, StringArrayPushOneElement);
     RUN_TEST_CASE(StringArrayTests, StringArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(StringArrayTests, StringArrayAtZeroLength);
@@ -812,6 +928,10 @@ TEST_GROUP_RUNNER(StringArrayTests) {
     RUN_TEST_CASE(StringArrayTests, StringArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(StringArrayTests, StringArrayPush);
     RUN_TEST_CASE(StringArrayTests, StringArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(StringArrayTests, StringArraySetZeroLength);
+    RUN_TEST_CASE(StringArrayTests, StringArraySetExistingElement);
+    RUN_TEST_CASE(StringArrayTests, StringArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(StringArrayTests, StringArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(StringArrayTests, StringArraySortAscending);
     RUN_TEST_CASE(StringArrayTests, StringArraySortDescending);
     RUN_TEST_CASE(StringArrayTests, StringArrayOverlapEmptyArrays);
@@ -823,6 +943,8 @@ TEST_GROUP_RUNNER(StringArrayTests) {
 TEST_GROUP_RUNNER(UnsignedArrayTests) {
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayInitialLength);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayPushOneElement);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayAtZeroLength);
@@ -853,6 +975,10 @@ TEST_GROUP_RUNNER(UnsignedArrayTests) {
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayPush);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySortAscending);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArraySortDescending);
     RUN_TEST_CASE(UnsignedArrayTests, UnsignedArrayOverlapEmptyArrays);
@@ -864,6 +990,8 @@ TEST_GROUP_RUNNER(UnsignedArrayTests) {
 TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayInitialLength);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayPushOneElement);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayAtZeroLength);
@@ -894,6 +1022,10 @@ TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayPush);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySortAscending);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArraySortDescending);
     RUN_TEST_CASE(UnsignedCharArrayTests, UnsignedCharArrayOverlapEmptyArrays);
@@ -905,6 +1037,8 @@ TEST_GROUP_RUNNER(UnsignedCharArrayTests) {
 TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayInitialLength);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayPushOneElement);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayAtZeroLength);
@@ -935,6 +1069,10 @@ TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayPush);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySortAscending);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArraySortDescending);
     RUN_TEST_CASE(UnsignedIntArrayTests, UnsignedIntArrayOverlapEmptyArrays);
@@ -946,6 +1084,8 @@ TEST_GROUP_RUNNER(UnsignedIntArrayTests) {
 TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayInitialLength);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayPushOneElement);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayAtZeroLength);
@@ -976,6 +1116,10 @@ TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayPush);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySortAscending);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArraySortDescending);
     RUN_TEST_CASE(UnsignedLongArrayTests, UnsignedLongArrayOverlapEmptyArrays);
@@ -987,6 +1131,8 @@ TEST_GROUP_RUNNER(UnsignedLongArrayTests) {
 TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayInitialLength);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayPushOneElement);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayAtZeroLength);
@@ -1017,6 +1163,10 @@ TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySortAscending);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArraySortDescending);
     RUN_TEST_CASE(UnsignedLongIntArrayTests, UnsignedLongIntArrayOverlapEmptyArrays);
@@ -1028,6 +1178,8 @@ TEST_GROUP_RUNNER(UnsignedLongIntArrayTests) {
 TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayInitialLength);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayPushOneElement);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayAtZeroLength);
@@ -1058,6 +1210,10 @@ TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayPush);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySortAscending);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArraySortDescending);
     RUN_TEST_CASE(UnsignedLongLongArrayTests, UnsignedLongLongArrayOverlapEmptyArrays);
@@ -1069,6 +1225,8 @@ TEST_GROUP_RUNNER(UnsignedLongLongArrayTests) {
 TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitialLength);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushOneElement);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayAtZeroLength);
@@ -1099,6 +1257,10 @@ TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPush);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortAscending);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySortDescending);
     RUN_TEST_CASE(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayOverlapEmptyArrays);
@@ -1110,6 +1272,8 @@ TEST_GROUP_RUNNER(UnsignedLongLongIntArrayTests) {
 TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayInitialLength);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayPushOneElement);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayAtZeroLength);
@@ -1140,6 +1304,10 @@ TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayPush);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySortAscending);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArraySortDescending);
     RUN_TEST_CASE(UnsignedShortArrayTests, UnsignedShortArrayOverlapEmptyArrays);
@@ -1151,6 +1319,8 @@ TEST_GROUP_RUNNER(UnsignedShortArrayTests) {
 TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayInitialLength);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayInitialCapacity);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayInitializeFromEmptyPointer);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayInitializeFromPointer);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayPushOneElement);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayPushCapacityPlusOneElements);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayAtZeroLength);
@@ -1181,6 +1351,10 @@ TEST_GROUP_RUNNER(UnsignedShortIntArrayTests) {
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayNonEmptyArrayIsNotEmpty);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayPush);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayMultipleElementArrayToString);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySetZeroLength);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySetExistingElement);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySetLessThanZeroIndex);
+    RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayAtGreaterThanLengthIndex);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySortAscending);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArraySortDescending);
     RUN_TEST_CASE(UnsignedShortIntArrayTests, UnsignedShortIntArrayOverlapEmptyArrays);

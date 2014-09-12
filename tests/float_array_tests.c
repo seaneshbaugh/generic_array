@@ -27,6 +27,26 @@ TEST(FloatArrayTests, FloatArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, floatArray.capacity);
 }
 
+TEST(FloatArrayTests, FloatArrayInitializeFromEmptyPointer) {
+    float values[] = { };
+
+    int result = FloatArrayInitializeFromPointer(&floatArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, FloatArrayCount(&floatArray));
+}
+
+TEST(FloatArrayTests, FloatArrayInitializeFromPointer) {
+    float values[5] = { 1.0F, 2.0F, 3.0F, 4.0F, 5.0F };
+
+    int result = FloatArrayInitializeFromPointer(&floatArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, FloatArrayCount(&floatArray));
+}
+
 TEST(FloatArrayTests, FloatArrayPushOneElement) {
     int result = FloatArrayPush(&floatArray, 1.0F);
 
@@ -547,6 +567,84 @@ TEST(FloatArrayTests, FloatArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1.000000, 2.000000, 3.000000, 4.000000, 5.000000]", asString);
 
     free(asString);
+}
+
+TEST(FloatArrayTests, FloatArraySetZeroLength) {
+    int result = FloatArraySet(&floatArray, 2, 5.0F);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(FloatArrayTests, FloatArraySetExistingElement) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    int result = FloatArraySet(&floatArray, 2, 5.0F);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    float x;
+
+    result = FloatArrayAt(&floatArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArraySetLessThanZeroIndex) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    int result = FloatArraySet(&floatArray, -2, 5.0F);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    float x;
+
+    result = FloatArrayAt(&floatArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5.0F, x);
+}
+
+TEST(FloatArrayTests, FloatArraySetGreaterThanLengthIndex) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    int result = FloatArraySet(&floatArray, 4, 5.0F);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(FloatArrayTests, FloatArraySetLessThanNegativeLengthIndex) {
+    FloatArrayPush(&floatArray, 1.0F);
+
+    FloatArrayPush(&floatArray, 2.0F);
+
+    FloatArrayPush(&floatArray, 3.0F);
+
+    FloatArrayPush(&floatArray, 4.0F);
+
+    int result = FloatArraySet(&floatArray, -5, 5.0F);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int FloatAscendingCompare(const void *a, const void *b) {

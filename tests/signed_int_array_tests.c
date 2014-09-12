@@ -27,6 +27,26 @@ TEST(SignedIntArrayTests, SignedIntArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, signedIntArray.capacity);
 }
 
+TEST(SignedIntArrayTests, SignedIntArrayInitializeFromEmptyPointer) {
+    signed int values[] = { };
+
+    int result = SignedIntArrayInitializeFromPointer(&signedIntArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, SignedIntArrayCount(&signedIntArray));
+}
+
+TEST(SignedIntArrayTests, SignedIntArrayInitializeFromPointer) {
+    signed int values[5] = { 1, 2, 3, 4, 5 };
+
+    int result = SignedIntArrayInitializeFromPointer(&signedIntArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, SignedIntArrayCount(&signedIntArray));
+}
+
 TEST(SignedIntArrayTests, SignedIntArrayPushOneElement) {
     int result = SignedIntArrayPush(&signedIntArray, 1);
 
@@ -547,6 +567,84 @@ TEST(SignedIntArrayTests, SignedIntArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySetZeroLength) {
+    int result = SignedIntArraySet(&signedIntArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySetExistingElement) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    int result = SignedIntArraySet(&signedIntArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed int x;
+
+    result = SignedIntArrayAt(&signedIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySetLessThanZeroIndex) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    int result = SignedIntArraySet(&signedIntArray, -2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    signed int x;
+
+    result = SignedIntArrayAt(&signedIntArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySetGreaterThanLengthIndex) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    int result = SignedIntArraySet(&signedIntArray, 4, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(SignedIntArrayTests, SignedIntArraySetLessThanNegativeLengthIndex) {
+    SignedIntArrayPush(&signedIntArray, 1);
+
+    SignedIntArrayPush(&signedIntArray, 2);
+
+    SignedIntArrayPush(&signedIntArray, 3);
+
+    SignedIntArrayPush(&signedIntArray, 4);
+
+    int result = SignedIntArraySet(&signedIntArray, -5, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int SignedIntAscendingCompare(const void *a, const void *b) {

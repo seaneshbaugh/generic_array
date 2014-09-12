@@ -27,6 +27,26 @@ TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, unsignedLongLongIntArray.capacity);
 }
 
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitializeFromEmptyPointer) {
+    unsigned long long int values[] = { };
+
+    int result = UnsignedLongLongIntArrayInitializeFromPointer(&unsignedLongLongIntArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, UnsignedLongLongIntArrayCount(&unsignedLongLongIntArray));
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayInitializeFromPointer) {
+    unsigned long long int values[5] = { 1ULL, 2ULL, 3ULL, 4ULL, 5ULL };
+
+    int result = UnsignedLongLongIntArrayInitializeFromPointer(&unsignedLongLongIntArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, UnsignedLongLongIntArrayCount(&unsignedLongLongIntArray));
+}
+
 TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayPushOneElement) {
     int result = UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
 
@@ -547,6 +567,84 @@ TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArrayMultipleElementArray
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetZeroLength) {
+    int result = UnsignedLongLongIntArraySet(&unsignedLongLongIntArray, 2, 5ULL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetExistingElement) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    int result = UnsignedLongLongIntArraySet(&unsignedLongLongIntArray, 2, 5ULL);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned long long int x;
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5ULL, x);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetLessThanZeroIndex) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    int result = UnsignedLongLongIntArraySet(&unsignedLongLongIntArray, -2, 5ULL);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    unsigned long long int x;
+
+    result = UnsignedLongLongIntArrayAt(&unsignedLongLongIntArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5ULL, x);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetGreaterThanLengthIndex) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    int result = UnsignedLongLongIntArraySet(&unsignedLongLongIntArray, 4, 5ULL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(UnsignedLongLongIntArrayTests, UnsignedLongLongIntArraySetLessThanNegativeLengthIndex) {
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 1ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 2ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 3ULL);
+
+    UnsignedLongLongIntArrayPush(&unsignedLongLongIntArray, 4ULL);
+
+    int result = UnsignedLongLongIntArraySet(&unsignedLongLongIntArray, -5, 5ULL);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int UnsignedLongLongIntAscendingCompare(const void *a, const void *b) {

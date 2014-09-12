@@ -27,6 +27,26 @@ TEST(LongLongArrayTests, LongLongArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, longLongArray.capacity);
 }
 
+TEST(LongLongArrayTests, LongLongArrayInitializeFromEmptyPointer) {
+    long long values[] = { };
+
+    int result = LongLongArrayInitializeFromPointer(&longLongArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, LongLongArrayCount(&longLongArray));
+}
+
+TEST(LongLongArrayTests, LongLongArrayInitializeFromPointer) {
+    long long values[5] = { 1, 2, 3, 4, 5 };
+
+    int result = LongLongArrayInitializeFromPointer(&longLongArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, LongLongArrayCount(&longLongArray));
+}
+
 TEST(LongLongArrayTests, LongLongArrayPushOneElement) {
     int result = LongLongArrayPush(&longLongArray, 1);
 
@@ -547,6 +567,84 @@ TEST(LongLongArrayTests, LongLongArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("[1, 2, 3, 4, 5]", asString);
 
     free(asString);
+}
+
+TEST(LongLongArrayTests, LongLongArraySetZeroLength) {
+    int result = LongLongArraySet(&longLongArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(LongLongArrayTests, LongLongArraySetExistingElement) {
+    LongLongArrayPush(&longLongArray, 1);
+
+    LongLongArrayPush(&longLongArray, 2);
+
+    LongLongArrayPush(&longLongArray, 3);
+
+    LongLongArrayPush(&longLongArray, 4);
+
+    int result = LongLongArraySet(&longLongArray, 2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    long long x;
+
+    result = LongLongArrayAt(&longLongArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(LongLongArrayTests, LongLongArraySetLessThanZeroIndex) {
+    LongLongArrayPush(&longLongArray, 1);
+
+    LongLongArrayPush(&longLongArray, 2);
+
+    LongLongArrayPush(&longLongArray, 3);
+
+    LongLongArrayPush(&longLongArray, 4);
+
+    int result = LongLongArraySet(&longLongArray, -2, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    long long x;
+
+    result = LongLongArrayAt(&longLongArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, x);
+}
+
+TEST(LongLongArrayTests, LongLongArraySetGreaterThanLengthIndex) {
+    LongLongArrayPush(&longLongArray, 1);
+
+    LongLongArrayPush(&longLongArray, 2);
+
+    LongLongArrayPush(&longLongArray, 3);
+
+    LongLongArrayPush(&longLongArray, 4);
+
+    int result = LongLongArraySet(&longLongArray, 4, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(LongLongArrayTests, LongLongArraySetLessThanNegativeLengthIndex) {
+    LongLongArrayPush(&longLongArray, 1);
+
+    LongLongArrayPush(&longLongArray, 2);
+
+    LongLongArrayPush(&longLongArray, 3);
+
+    LongLongArrayPush(&longLongArray, 4);
+
+    int result = LongLongArraySet(&longLongArray, -5, 5);
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int LongLongAscendingCompare(const void *a, const void *b) {

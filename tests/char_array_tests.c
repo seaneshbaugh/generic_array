@@ -27,6 +27,26 @@ TEST(CharArrayTests, CharArrayInitialCapacity) {
     TEST_ASSERT_EQUAL(GA_INITIAL_CAPACITY, charArray.capacity);
 }
 
+TEST(CharArrayTests, CharArrayInitializeFromEmptyPointer) {
+    char values[] = { };
+
+    int result = CharArrayInitializeFromPointer(&charArray, values, 0);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(0, CharArrayCount(&charArray));
+}
+
+TEST(CharArrayTests, CharArrayInitializeFromPointer) {
+    char values[5] = { 'A', 'B', 'C', 'D', 'E' };
+
+    int result = CharArrayInitializeFromPointer(&charArray, values, 5);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL(5, CharArrayCount(&charArray));
+}
+
 TEST(CharArrayTests, CharArrayPushOneElement) {
     int result = CharArrayPush(&charArray, 'A');
 
@@ -547,6 +567,84 @@ TEST(CharArrayTests, CharArrayMultipleElementArrayToString) {
     TEST_ASSERT_EQUAL_STRING("['A', 'B', 'C', 'D', 'E']", asString);
 
     free(asString);
+}
+
+TEST(CharArrayTests, CharArraySetZeroLength) {
+    int result = CharArraySet(&charArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArraySetExistingElement) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    int result = CharArraySet(&charArray, 2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    char x;
+
+    result = CharArrayAt(&charArray, 2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArraySetLessThanZeroIndex) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    int result = CharArraySet(&charArray, -2, 'E');
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    char x;
+
+    result = CharArrayAt(&charArray, -2, &x);
+
+    TEST_ASSERT_EQUAL(GA_SUCCESS, result);
+
+    TEST_ASSERT_EQUAL('E', x);
+}
+
+TEST(CharArrayTests, CharArraySetGreaterThanLengthIndex) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    int result = CharArraySet(&charArray, 4, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
+}
+
+TEST(CharArrayTests, CharArraySetLessThanNegativeLengthIndex) {
+    CharArrayPush(&charArray, 'A');
+
+    CharArrayPush(&charArray, 'B');
+
+    CharArrayPush(&charArray, 'C');
+
+    CharArrayPush(&charArray, 'D');
+
+    int result = CharArraySet(&charArray, -5, 'E');
+
+    TEST_ASSERT_EQUAL(GA_ERROR_INDEX_OUT_OF_BOUNDS, result);
 }
 
 int CharAscendingCompare(const void *a, const void *b) {
